@@ -2,7 +2,7 @@
 
 #### Usuarios del Sistema
 
-El sistema debe ser capaz de diferenciar los siguientes roles y/o permisos:
+##### El sistema debe ser capaz de diferenciar los siguientes roles y/o permisos:
 
 - Operador: registra y actualiza datos.
 - Administrador: acceso total.
@@ -14,7 +14,6 @@ El sistema debe ser capaz de diferenciar los siguientes roles y/o permisos:
 - Alta, baja y modificación de revisiones.
 - Alta, baja y modificación de donantes.
 - Gestión de usuarios del sistema.
-
 - Los donantes son personas y pueden donar piezas.
 - Los usuarios son personas y pueden revisar y clasificar piezas.
 
