@@ -36,7 +36,7 @@
 						{{ $fondo->fondo_carga }}
 					</td>
 					<td>
-						<div>
+						<div class="btn-group">
 							<a href="{{ route('fondos.show', $fondo->id) }}" class="btn btn-default" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
 	                        <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-default" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
 	                        <a class="btn btn-danger" title="Eliminar"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>

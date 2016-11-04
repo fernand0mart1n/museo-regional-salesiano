@@ -49,7 +49,8 @@ class FondoController extends Controller
      */
     public function show($id)
     {
-        //
+        $fondo = Fondo::find($id);
+        return view('fondos.show',compact('fondo'));
     }
 
     /**
