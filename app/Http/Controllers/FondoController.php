@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Fondo;
+use App\User;
 
 class FondoController extends Controller
 {
@@ -13,7 +15,9 @@ class FondoController extends Controller
      */
     public function index()
     {
-        //
+        $fondos = Fondo::all();
+
+        return view("fondos.index", compact("fondos"));
     }
 
     /**
