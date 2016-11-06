@@ -1,8 +1,12 @@
-@include('layouts.app')
-
 @extends('layouts.layout')
 
-@include('layouts.librerias')
+@include('layouts.app')
+
+@section('head')
+
+	@include('layouts.librerias')
+
+@endsection
 
 @section('content')
 	<div class="col-md-offset-1 col-md-10">
