@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Fondo extends Model
 {
+
+	protected $fillable = [
+        'descripcion', 'usuario_carga', 'fondo_carga'
+    ];
+
     public $timestamps = false;
 
     public function user() {

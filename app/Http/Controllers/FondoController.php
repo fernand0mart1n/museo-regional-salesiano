@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Fondo;
 use App\User;
 
@@ -27,7 +27,7 @@ class FondoController extends Controller
      */
     public function create()
     {
-        //
+        return view('fondos.create');
     }
 
     /**
@@ -38,7 +38,9 @@ class FondoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fondo = Request::all();
+        Fondo::create($fondo);
+        return redirect('fondos');
     }
 
     /**
@@ -61,7 +63,8 @@ class FondoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $fondo = Fondo::find($id);
+        return view('fondos.edit',compact('fondo'));
     }
 
     /**
@@ -73,7 +76,10 @@ class FondoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $fondoUpdate = Request::all();
+        $fondo = Fondo::find($id);
+        $fondo->update($fondoUpdate);
+        return redirect('fondos');
     }
 
     /**
@@ -84,6 +90,7 @@ class FondoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Fondo::find($id)->delete();
+        return redirect('fondos');
     }
 }

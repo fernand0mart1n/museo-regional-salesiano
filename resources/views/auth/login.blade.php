@@ -20,8 +20,8 @@
                 {{ csrf_field() }}
                 <p> 
                     <!--div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}"-->
-                    <label for="username" class="uname" data-icon="u" ><span>Nombre de usuario o email</span></label>
-                    <input id="username" name="username" required="required" value="{{ old('username') }}" type="text" placeholder="Usuario o email"/>
+                    <label for="username" class="uname" data-icon="u" ><span>Nombre de usuario</span></label>
+                    <input id="name" name="name" required="required" value="{{ old('username') }}" type="text" placeholder="Usuario"/>
 
                     @if ($errors->has('username'))
                         <span class="help-block">

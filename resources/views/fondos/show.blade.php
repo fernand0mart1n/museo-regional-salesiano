@@ -12,15 +12,15 @@
 	        <li class="active">Fondo {{ $fondo->id }}</li>
 	    </ol>
 	    <div class="page-header text-center">
-	        <h1>
+	        <h2>
 	            Fondo {{ $fondo->id }}<small>.</small>
-	        </h1>
+	        </h2>
 	    </div>
 	    <form class="form-horizontal">
 	        <div class="form-group">
 	            <label for="descripcion" class="col-sm-3 control-label">Descripción</label>
 	            <div class="col-sm-8">
-	                <input type="text" class="form-control" id="descripcion" placeholder="{{ $fondo->descripcion }}" readonly>
+	                <textarea class="form-control" id="descripcion" placeholder="{{ $fondo->descripcion }}" readonly></textarea>
 	            </div>
 	        </div>
 	        <div class="form-group">

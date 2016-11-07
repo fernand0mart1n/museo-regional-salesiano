@@ -1,7 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.layout')
 
-<!-- Main Content -->
+@section('head')
+
+@include('layouts.librerias')
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href="{{ asset('css/animate-custom.css') }}" rel="stylesheet" type="text/css" media="all" />
+<link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+
+@endsection
+
 @section('content')
+<h2 class="w3ls">Museo Regional Salesiano</h2>
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
