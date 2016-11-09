@@ -1,5 +1,8 @@
- 
+@include('layouts.app')
+
 @extends('layouts.layout')
+
+@section('titulo', ' - Cargar fondo')
 
 @section('head')
 
@@ -9,9 +12,17 @@
 
 @section('content')
 	<div class="col-md-offset-1 col-md-10">
-	    <h1>Cargar fondo</h1>
+		<ol class="breadcrumb">
+	        <li><a href="{{ url('/') }}">Inicio</a></li>
+	        <li><a href="{{ route('fondos.index') }}">Fondos</a></li>
+	        <li class="active">Cargar fondo</li>
+	    </ol>
+	    <div class="page-header text-center">
+	        <h2>
+	            Cargar fondo<small>.</small>
+	        </h2>
+	    </div>
 	    <?= Former::open()
-    	->populate( Fondo::find($fondo->id) )
         ->method('POST')
         ->action('/fondos'); ?>            
 

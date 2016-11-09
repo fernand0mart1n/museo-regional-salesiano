@@ -2,12 +2,18 @@
 
 @extends('layouts.layout')
 
-@include('layouts.librerias')
+@section('titulo', ' - ' . $fondo->descripcion)
+
+@section('head')
+
+	@include('layouts.librerias')
+
+@endsection
 
 @section('content')
 	<div class="col-md-offset-1 col-md-10">
 		<ol class="breadcrumb">
-	        <li><a href="{{ url('home') }}">Inicio</a></li>
+	        <li><a href="{{ url('/') }}">Inicio</a></li>
 	        <li><a href="{{ route('fondos.index') }}">Fondos</a></li>
 	        <li class="active">Fondo {{ $fondo->id }}</li>
 	    </ol>

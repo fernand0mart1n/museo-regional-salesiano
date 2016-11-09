@@ -1,5 +1,8 @@
- 
+@include('layouts.app')
+
 @extends('layouts.layout')
+
+@section('titulo', ' - Editando' . $fondo->descripcion)
 
 @section('head')
 
@@ -9,8 +12,16 @@
 
 @section('content')
 	<div class="col-md-offset-1 col-md-10">
-	    <h1>Editar fondo {{ $fondo->id }}</h1>
-
+		<ol class="breadcrumb">
+	        <li><a href="{{ url('/') }}">Inicio</a></li>
+	        <li><a href="{{ route('fondos.index') }}">Fondos</a></li>
+	        <li class="active">Fondo {{ $fondo->id }}</li>
+	    </ol>
+	    <div class="page-header text-center">
+	        <h2>
+	            Editar fondo {{ $fondo->id }}<small>.</small>
+	        </h2>
+	    </div>
 	    <?= Former::open()
     	->method('patch')
     	->route(['fondos.update', $fondo->id])
