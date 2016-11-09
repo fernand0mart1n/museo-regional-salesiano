@@ -41,7 +41,7 @@
 	        ->value( Auth::user()->name )
 	        ->disabled() ?>
 
-	        <?= Former::date('fondo_carga')
+	        <?= Former::date('fecha_carga')
 	        ->label('Fecha de carga') ?>
 
 	        <div class="form-group">

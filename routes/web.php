@@ -16,3 +16,4 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 
 Route::resource('fondos','FondoController');
+Route::resource('clasificaciones','ClasificacionController');

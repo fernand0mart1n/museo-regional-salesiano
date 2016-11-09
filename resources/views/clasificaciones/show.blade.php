@@ -2,7 +2,7 @@
 
 @extends('layouts.layout')
 
-@section('titulo', ' - ' . $fondo->descripcion)
+@section('titulo', ' - ' . $clasificacion->descripcion)
 
 @section('head')
 
@@ -14,38 +14,44 @@
 	<div class="col-md-offset-1 col-md-10">
 		<ol class="breadcrumb">
 	        <li><a href="{{ url('/') }}">Inicio</a></li>
-	        <li><a href="{{ route('fondos.index') }}">Fondos</a></li>
-	        <li class="active">Fondo {{ $fondo->id }}</li>
+	        <li><a href="{{ route('clasificaciones.index') }}">Clasificaciones</a></li>
+	        <li class="active">Clasificación {{ $clasificacion->id }}</li>
 	    </ol>
 	    <div class="page-header text-center">
 	        <h3>
-	            Fondo {{ $fondo->id }}<small>.</small>
+	            Ver clasificación {{ $clasificacion->id }}<small>.</small>
 	        </h3>
 	    </div>
 	    <?= Former::open()
     	->method('patch')
-    	->route('fondos.update', $fondo->id) ?>
+    	->route('clasificaciones.update', $clasificacion->id) ?>
 
 	        <?= Former::textarea('descripcion')
 	        ->label('Descripción')
-	        ->placeholder($fondo->descripcion)
+	        ->placeholder($clasificacion->descripcion)
+	        ->readonly() ?>
+
+	        <?= Former::textarea('fondo_id')
+	        ->label('Pertenece al fondo')
+	        ->placeholder($clasificacion->fondo->descripcion)
 	        ->readonly() ?>
 
 	        <?= Former::text('usuario')
 	        ->label('Cargado por')
-	        ->placeholder( $fondo->user->name )
+	        ->placeholder( $clasificacion->user->name )
 	        ->readonly() ?>
 
 	        <?= Former::date('fecha_carga')
 	        ->label('Fecha de carga')
-	        ->placeholder($fondo->fecha_carga)
+	        ->placeholder($clasificacion->fecha_carga)
 	        ->readonly() ?>
 
 	        <div class="form-group">
 	            <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
-	                <a href="{{ route('fondos.index') }}" class="btn btn-default"> 		<i class="glyphicon glyphicon-chevron-left"></i> Volver
+	                <a href="{{ route('clasificaciones.index') }}" class="btn btn-default">
+	                	<i class="glyphicon glyphicon-chevron-left"></i> Volver
 	                </a>
-	                <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-primary pull-right"> 
+	                <a href="{{ route('clasificaciones.edit', $clasificacion->id) }}" class="btn btn-primary pull-right"> 
 	                	Editar <i class="glyphicon glyphicon-edit"></i>
 	                </a>
 	            </div>

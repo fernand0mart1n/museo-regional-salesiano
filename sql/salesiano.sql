@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-11-2016 a las 00:22:07
+-- Tiempo de generación: 09-11-2016 a las 16:47:47
 -- Versión del servidor: 5.7.16-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.8-0ubuntu0.16.04.3
 
@@ -29,10 +29,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `clasificaciones` (
   `id` int(10) UNSIGNED NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
-  `fondo` int(10) UNSIGNED NOT NULL,
+  `fondo_id` int(10) UNSIGNED NOT NULL,
   `usuario_carga` int(10) UNSIGNED NOT NULL,
   `fecha_carga` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `clasificaciones`
+--
+
+INSERT INTO `clasificaciones` (`id`, `descripcion`, `fondo_id`, `usuario_carga`, `fecha_carga`) VALUES
+(3, 'efaasfsaasasf', 3, 1, '2016-11-09');
 
 -- --------------------------------------------------------
 
@@ -69,8 +76,15 @@ CREATE TABLE `fondos` (
   `id` int(10) UNSIGNED NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   `usuario_carga` int(10) UNSIGNED NOT NULL,
-  `fondo_carga` date DEFAULT NULL
+  `fecha_carga` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `fondos`
+--
+
+INSERT INTO `fondos` (`id`, `descripcion`, `usuario_carga`, `fecha_carga`) VALUES
+(3, 'asdasd', 1, '2016-11-05');
 
 -- --------------------------------------------------------
 
@@ -115,6 +129,13 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('fmvaldebenito@udc.edu.ar', '76e7c6afe8e26e643391d3bc7f9c37d1388600fce72e6a69c78b49465c55ab08', '2016-11-09 22:39:35');
 
 -- --------------------------------------------------------
 
@@ -182,6 +203,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `persona`, `created_at`, `updated_at`) VALUES
+(1, 'valdesoft', 'fmvaldebenito@udc.edu.ar', '$2y$10$E0XFxlHRiWTzC5uhfo7AsOtopVplaEJv6VrJlLVhKiqFBDWwWlwpO', 'Qja2UN70EkohjjwqAjzwgQnE1Mt8euuEOXM5SBhpsmBBrhbDOQUCt8ztICvC', NULL, '2016-11-04 20:24:39', '2016-11-09 22:39:07');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -191,7 +219,7 @@ CREATE TABLE `users` (
 ALTER TABLE `clasificaciones`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_clasificaciones_users1_idx` (`usuario_carga`),
-  ADD KEY `fk_clasificaciones_fondo1_idx` (`fondo`);
+  ADD KEY `fk_clasificaciones_fondo1_idx` (`fondo_id`);
 
 --
 -- Indices de la tabla `donaciones`
@@ -272,7 +300,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `clasificaciones`
 --
 ALTER TABLE `clasificaciones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `donaciones`
 --
@@ -287,7 +315,7 @@ ALTER TABLE `donantes`
 -- AUTO_INCREMENT de la tabla `fondos`
 --
 ALTER TABLE `fondos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `fotos`
 --
@@ -317,7 +345,7 @@ ALTER TABLE `revisiones`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Restricciones para tablas volcadas
 --
@@ -326,7 +354,7 @@ ALTER TABLE `users`
 -- Filtros para la tabla `clasificaciones`
 --
 ALTER TABLE `clasificaciones`
-  ADD CONSTRAINT `fk_clasificaciones_fondo1` FOREIGN KEY (`fondo`) REFERENCES `fondos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_clasificaciones_fondo1` FOREIGN KEY (`fondo_id`) REFERENCES `fondos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_clasificaciones_users1` FOREIGN KEY (`usuario_carga`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --

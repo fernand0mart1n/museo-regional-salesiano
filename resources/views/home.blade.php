@@ -17,7 +17,10 @@
 
                 <div class="panel-body">
                     Bienvenido/a {{ Auth::user()->name . " - " . Auth::user()->email }}
-                    <li><a href="{{ route('fondos.index') }}">Ir a fondos</a></li>
+                    <ul>
+                        <li><a href="{{ route('fondos.index') }}">Ir a fondos</a></li>
+                        <li><a href="{{ route('clasificaciones.index') }}">Ir a clasificaciones</a></li>
+                    </ul>
                 </div>
             </div>
         </div>

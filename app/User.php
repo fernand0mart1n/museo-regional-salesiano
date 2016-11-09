@@ -31,4 +31,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Fondo');
     }
+
+    public function clasificacion()
+    {
+        return $this->belongsTo('App\Clasificacion');
+    }
 }

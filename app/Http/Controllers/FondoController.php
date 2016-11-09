@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Request;
 use Auth;
 use App\Fondo;
-use App\User;
 
 class FondoController extends Controller
 {

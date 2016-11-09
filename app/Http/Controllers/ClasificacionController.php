@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+use Auth;
+use App\Clasificacion;
 
 class ClasificacionController extends Controller
 {
@@ -13,7 +15,15 @@ class ClasificacionController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check()){
+
+            $clasificaciones = Clasificacion::all();
+
+            return view("clasificaciones.index", compact("clasificaciones"));
+
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -23,7 +33,11 @@ class ClasificacionController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::check()){    
+            return view('clasificaciones.create');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -34,7 +48,13 @@ class ClasificacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::check()){
+            $clasificacion = Request::all();
+            Clasificacion::create($clasificacion);
+            return redirect('clasificaciones');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -45,7 +65,12 @@ class ClasificacionController extends Controller
      */
     public function show($id)
     {
-        //
+        if(Auth::check()){
+            $clasificacion = Clasificacion::find($id);
+            return view('clasificaciones.show',compact('clasificacion'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -56,7 +81,12 @@ class ClasificacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::check()){
+            $clasificacion = Clasificacion::find($id);
+            return view('clasificaciones.edit',compact('clasificacion'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -68,7 +98,14 @@ class ClasificacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(Auth::check()){
+            $clasificacionUpdate = Request::all();
+            $clasificacion = Clasificacion::find($id);
+            $clasificacion->update($clasificacionUpdate);
+            return redirect('clasificaciones');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -79,6 +116,11 @@ class ClasificacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::check()){
+            Clasificacion::find($id)->delete();
+            return redirect('clasificaciones');
+        } else {
+            return view('auth.login');
+        }
     }
 }

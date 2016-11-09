@@ -2,7 +2,7 @@
 
 @include('layouts.app')
 
-@section('titulo', ' - Listado de fondos')
+@section('titulo', ' - Listado de clasificaciones')
 
 @section('head')
 
@@ -12,9 +12,9 @@
 
 @section('content')
 	<div class="col-md-offset-1 col-md-10">
-		<h3>Fondos</h3>
-		<a href="{{url('/fondos/create')}}" class="btn btn-primary">
-			<i class="glyphicon glyphicon-plus"></i> Cargar fondo
+		<h3>Clasificaciones</h3>
+		<a href="{{url('/clasificaciones/create')}}" class="btn btn-primary">
+			<i class="glyphicon glyphicon-plus"></i> Cargar clasificacion
 		</a>
 		<hr>
 		<table class="table">
@@ -22,6 +22,9 @@
 				<tr>
 					<th>
 						Descripción
+					</th>
+					<th>
+						Fondo
 					</th>
 					<th>
 						Cargado por
@@ -35,26 +38,29 @@
 				</tr>
 			</thead>
 			<tbody>
-				@foreach($fondos as $fondo)
+				@foreach($clasificaciones as $clasificacion)
 				<tr>
 					<td>
-						{{ $fondo->descripcion }}
+						{{ $clasificacion->descripcion }}
 					</td>
 					<td>
-						{{ $fondo->user->name }}
+						{{ $clasificacion->fondo->descripcion }}
 					</td>
 					<td>
-						{{ $fondo->fecha_carga }}
+						{{ $clasificacion->user->name }}
+					</td>
+					<td>
+						{{ $clasificacion->fecha_carga }}
 					</td>
 					<td>
 						<div class="btn-group">
-							<a href="{{ route('fondos.show', $fondo->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
-	                        <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+							<a href="{{ route('clasificaciones.show', $clasificacion->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
+	                        <a href="{{ route('clasificaciones.edit', $clasificacion->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
 
 	                        <?= Former::open()
 	                        ->class('btn-group')
 	                        ->method('delete')
-	                        ->route('fondos.destroy', $fondo->id) ?>
+	                        ->route('clasificaciones.destroy', $clasificacion->id) ?>
 
 	                        {{ csrf_field() }}
 
