@@ -18,9 +18,9 @@
 	        <li class="active">Fondo {{ $fondo->id }}</li>
 	    </ol>
 	    <div class="page-header text-center">
-	        <h2>
+	        <h3>
 	            Fondo {{ $fondo->id }}<small>.</small>
-	        </h2>
+	        </h3>
 	    </div>
 	    <?= Former::open()
     	->method('patch')
@@ -28,18 +28,17 @@
 
 	        <?= Former::textarea('descripcion')
 	        ->label('Descripción')
-	        ->value($fondo->descripcion)
-	        ->placeholder('Descripción')
+	        ->placeholder($fondo->descripcion)
 	        ->readonly() ?>
 
 	        <?= Former::text('usuario')
 	        ->label('Cargado por')
-	        ->value( $fondo->user->name )
+	        ->placeholder( $fondo->user->name )
 	        ->readonly() ?>
 
 	        <?= Former::date('fondo_carga')
 	        ->label('Fecha de carga')
-	        ->value($fondo->fondo_carga)
+	        ->placeholder($fondo->fondo_carga)
 	        ->readonly() ?>
 
 	        <div class="form-group">

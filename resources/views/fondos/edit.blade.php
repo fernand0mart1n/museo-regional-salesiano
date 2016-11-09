@@ -18,9 +18,9 @@
 	        <li class="active">Editar fondo {{ $fondo->id }}</li>
 	    </ol>
 	    <div class="page-header text-center">
-	        <h2>
+	        <h3>
 	            Editar fondo {{ $fondo->id }}<small>.</small>
-	        </h2>
+	        </h3>
 	    </div>
 
 	    <?= Former::open()
@@ -34,7 +34,7 @@
 
 	        <?= Former::text('usuario')
 	        ->label('Cargado por')
-	        ->value( $fondo->user->name )
+	        ->placeholder( $fondo->user->name )
 	        ->readonly() ?>
 
 	        <?= Former::date('fondo_carga')
@@ -50,7 +50,7 @@
 		        	<?= Former::button()
 	            	->type('submit')
 	            	->value('Actualizar <i class="glyphicon glyphicon-floppy-save"></i>')
-	            	->class('btn btn-success pull-right') ?>
+	            	->class('btn btn-primary pull-right') ?>
 	            </div>
 	        </div>
 

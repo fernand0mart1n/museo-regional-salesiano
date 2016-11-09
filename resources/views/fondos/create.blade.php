@@ -18,9 +18,9 @@
 	        <li class="active">Cargar fondo</li>
 	    </ol>
 	    <div class="page-header text-center">
-	        <h2>
+	        <h3>
 	            Cargar fondo<small>.</small>
-	        </h2>
+	        </h3>
 	    </div>
 
 	    <?= Former::open()
@@ -53,7 +53,7 @@
 		        	<?= Former::button()
 	            	->type('submit')
 	            	->value('Cargar <i class="glyphicon glyphicon glyphicon-plus"></i>')
-	            	->class('btn btn-success pull-right') ?>
+	            	->class('btn btn-primary pull-right') ?>
 	            </div>
 	        </div>
 

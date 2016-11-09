@@ -12,8 +12,8 @@
 
 @section('content')
 	<div class="col-md-offset-1 col-md-10">
-		<h2>Fondos</h2>
-		<a href="{{url('/fondos/create')}}" class="btn btn-success">
+		<h3>Fondos</h3>
+		<a href="{{url('/fondos/create')}}" class="btn btn-primary">
 			<i class="glyphicon glyphicon-plus"></i> Cargar fondo
 		</a>
 		<hr>
@@ -48,8 +48,8 @@
 					</td>
 					<td>
 						<div class="btn-group">
-							<a href="{{ route('fondos.show', $fondo->id) }}" class="btn btn-default" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
-	                        <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-default" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+							<a href="{{ route('fondos.show', $fondo->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
+	                        <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
 
 	                        <?= Former::open()
 	                        ->class('btn-group')
