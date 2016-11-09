@@ -2,7 +2,11 @@
 
 @extends('layouts.layout')
 
-@include('layouts.librerias')
+@section('head')
+
+	@include('layouts.librerias')
+
+@endsection
 
 @section('content')
 	<div class="col-md-offset-1 col-md-10">
@@ -16,31 +20,36 @@
 	            Fondo {{ $fondo->id }}<small>.</small>
 	        </h2>
 	    </div>
-	    <form class="form-horizontal">
+	    <?= Former::open()
+    	->method('patch')
+    	->route('fondos.update', $fondo->id) ?>
+
+	        <?= Former::textarea('descripcion')
+	        ->label('Descripción')
+	        ->value($fondo->descripcion)
+	        ->placeholder('Descripción')
+	        ->readonly() ?>
+
+	        <?= Former::text('usuario')
+	        ->label('Cargado por')
+	        ->value( $fondo->user->name )
+	        ->readonly() ?>
+
+	        <?= Former::date('fondo_carga')
+	        ->label('Fecha de carga')
+	        ->value($fondo->fondo_carga)
+	        ->readonly() ?>
+
 	        <div class="form-group">
-	            <label for="descripcion" class="col-sm-3 control-label">Descripción</label>
-	            <div class="col-sm-8">
-	                <textarea class="form-control" id="descripcion" placeholder="{{ $fondo->descripcion }}" readonly></textarea>
+	            <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
+	                <a href="{{ route('fondos.index') }}" class="btn btn-default"> 		<i class="glyphicon glyphicon-chevron-left"></i> Volver
+	                </a>
+	                <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-primary pull-right"> 
+	                	Editar <i class="glyphicon glyphicon-edit"></i>
+	                </a>
 	            </div>
 	        </div>
-	        <div class="form-group">
-	            <label for="user" class="col-sm-3 control-label">Usuario</label>
-	            <div class="col-sm-8">
-	                <input type="text" class="form-control" id="user" placeholder="{{ $fondo->user->name }}" readonly>
-	            </div>
-	        </div>
-	        <div class="form-group">
-	            <label for="fondo_carga" class="col-sm-3 control-label">Fecha de carga</label>
-	            <div class="col-sm-8">
-	                <input type="date" class="form-control" id="fondo_carga" placeholder="{{ $fondo->fondo_carga }}" readonly>
-	            </div>
-	        </div>
-	        <div class="form-group">
-	            <div class="col-sm-offset-3 col-sm-8">
-	                <a href="{{ route('fondos.index') }}" class="btn btn-default"> Volver</a>
-	                <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-primary pull-right"> Editar</a>
-	            </div>
-	        </div>
-	    </form>
+
+	    <?= Former::close() ?>
 	</div>
 @stop
