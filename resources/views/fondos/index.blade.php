@@ -2,6 +2,8 @@
 
 @include('layouts.app')
 
+@section('titulo', ' - Listado de fondos')
+
 @section('head')
 
 	@include('layouts.librerias')

@@ -2,6 +2,8 @@
 
 @extends('layouts.layout')
 
+@section('titulo', ' - Cargando fondo')
+
 @section('head')
 
 	@include('layouts.librerias')
