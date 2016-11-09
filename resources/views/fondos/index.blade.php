@@ -2,6 +2,8 @@
 
 @include('layouts.app')
 
+@section('titulo', ' - Listado de fondos')
+
 @section('head')
 
 	@include('layouts.librerias')
@@ -10,8 +12,10 @@
 
 @section('content')
 	<div class="col-md-offset-1 col-md-10">
-		<h2>Fondos</h2>
-		<a href="{{url('/fondos/create')}}" class="btn btn-success">Cargar fondo</a>
+		<h3>Fondos</h3>
+		<a href="{{url('/fondos/create')}}" class="btn btn-primary">
+			<i class="glyphicon glyphicon-plus"></i> Cargar fondo
+		</a>
 		<hr>
 		<table class="table">
 			<thead>
@@ -44,17 +48,20 @@
 					</td>
 					<td>
 						<div class="btn-group">
-							<a href="{{ route('fondos.show', $fondo->id) }}" class="btn btn-default" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
-	                        <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-default" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+							<a href="{{ route('fondos.show', $fondo->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
+	                        <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
 
 	                        <?= Former::open()
+	                        ->class('btn-group')
 	                        ->method('delete')
-	                        ->route(['fondos.destroy', $fondo->id]) ?>
+	                        ->route('fondos.destroy', $fondo->id) ?>
 
-	                        <?= Former::submit('Eliminar')
-	                        ->class('glyphicon glyphicon-trash btn-danger') ?>
+	                        {{ csrf_field() }}
 
-	                        <a class="btn btn-danger" title="Eliminar"><i class="glyphicon glyphicon-trash"></i> Eliminar</a>
+	                        <?= Former::button()
+	                        ->type('submit')
+	                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
+	                        ->class('btn btn-danger') ?>
 						</div>
 					</td>
 					@endforeach

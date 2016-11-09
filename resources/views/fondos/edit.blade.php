@@ -2,7 +2,7 @@
 
 @extends('layouts.layout')
 
-@section('titulo', ' - Editando' . $fondo->descripcion)
+@section('titulo', ' - Editando fondo ' . $fondo->descripcion)
 
 @section('head')
 
@@ -22,12 +22,10 @@
 	            Editar fondo {{ $fondo->id }}<small>.</small>
 	        </h2>
 	    </div>
+	    
 	    <?= Former::open()
     	->method('patch')
-    	->route(['fondos.update', $fondo->id])
-    	->action('FondoController@update') ?>
-
-			<!--{!! Form::model($book,['method' => 'PATCH','route'=>['books.update',$book->id]]) !!}-->
+    	->route('fondos.update', $fondo->id) ?>
 
 	        <?= Former::textarea('descripcion')
 	        ->label('Descripción')
@@ -36,14 +34,25 @@
 
 	        <?= Former::text('usuario')
 	        ->label('Cargado por')
-	        ->value( $fondo->user->name )
+	        ->placeholder( $fondo->user->name )
 	        ->readonly() ?>
 
 	        <?= Former::date('fondo_carga')
 	        ->label('Fecha de carga')
 	        ->value($fondo->fondo_carga) ?>
 
-	        <?= Former::submit('Actualizar') ?>
+	        <div class="form-group">
+		        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
+		        	<a href="{{ route('fondos.index') }}" class="btn btn-default">
+		        		<i class="glyphicon glyphicon-chevron-left"></i> Volver
+		        	</a>
+
+		        	<?= Former::button()
+	            	->type('submit')
+	            	->value('Actualizar <i class="glyphicon glyphicon-floppy-save"></i>')
+	            	->class('btn btn-primary pull-right') ?>
+	            </div>
+	        </div>
 
 	    <?= Former::close() ?>
 	</div>

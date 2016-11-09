@@ -8,6 +8,7 @@
         @yield('head')
     </head>
     <body>
+        @yield('navbar')
         @yield('content')
     </body>
 </html>
