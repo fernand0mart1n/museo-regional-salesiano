@@ -21,7 +21,7 @@
 			<i class="glyphicon glyphicon-plus"></i> Cargar fondo
 		</a>
 		<hr>
-		<table class="table">
+		<table class="table table-condensed table-striped table-hover">
 			<thead>
 				<tr>
 					<th>
@@ -48,7 +48,7 @@
 						{{ $fondo->user->name }}
 					</td>
 					<td>
-						{{ $fondo->fecha_carga }}
+						{{ Carbon\Carbon::parse($fondo->fecha_carga)->format('d/m/Y') }}
 					</td>
 					<td>
 						<div class="btn-group">

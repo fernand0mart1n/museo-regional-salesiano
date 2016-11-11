@@ -21,7 +21,7 @@
 			<i class="glyphicon glyphicon-plus"></i> Cargar clasificación
 		</a>
 		<hr>
-		<table class="table">
+		<table class="table table-condensed table-striped table-hover">
 			<thead>
 				<tr>
 					<th>
@@ -54,7 +54,7 @@
 						{{ $clasificacion->user->name }}
 					</td>
 					<td>
-						{{ $clasificacion->fecha_carga }}
+						{{ Carbon\Carbon::parse($clasificacion->fecha_carga)->format('d/m/Y') }}
 					</td>
 					<td>
 						<div class="btn-group">

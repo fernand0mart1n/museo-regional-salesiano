@@ -50,7 +50,7 @@
 	        ->placeholder('Teléfono') ?>
 
 	        <?= Former::date('fecha_carga')
-	        ->value($persona->fecha_carga)
+	        ->value(Carbon\Carbon::parse($persona->fecha_carga)->format('d/m/Y'))
 	        ->label('Fecha de carga') ?>
 
 	        <div class="form-group">

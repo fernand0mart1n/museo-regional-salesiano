@@ -43,7 +43,7 @@
 
 	        <?= Former::date('fecha_carga')
 	        ->label('Fecha de carga')
-	        ->placeholder($clasificacion->fecha_carga)
+	        ->placeholder(Carbon\Carbon::parse($clasificacion->fecha_carga)->format('d/m/Y'))
 	        ->readonly() ?>
 
 	        <div class="form-group">

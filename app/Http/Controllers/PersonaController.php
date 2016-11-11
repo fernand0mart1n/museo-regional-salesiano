@@ -67,7 +67,7 @@ class PersonaController extends Controller
     {
         if(Auth::check()){
             $persona = Persona::find($id);
-            return view('personas.show',compact('Persona'));
+            return view('personas.show',compact('persona'));
         } else {
             return view('auth.login');
         }
@@ -83,7 +83,7 @@ class PersonaController extends Controller
     {
         if(Auth::check()){
             $persona = Persona::find($id);
-            return view('personas.edit',compact('Persona'));
+            return view('personas.edit',compact('persona'));
         } else {
             return view('auth.login');
         }

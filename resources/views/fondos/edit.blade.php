@@ -39,7 +39,7 @@
 
 	        <?= Former::date('fecha_carga')
 	        ->label('Fecha de carga')
-	        ->value($fondo->fecha_carga) ?>
+	        ->value( Carbon\Carbon::parse($fondo->fecha_carga)->format('d/m/Y') ) ?>
 
 	        <div class="form-group">
 		        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">

@@ -21,14 +21,11 @@
 			<i class="glyphicon glyphicon-plus"></i> Cargar persona
 		</a>
 		<hr>
-		<table class="table">
+		<table class="table table-condensed table-striped table-hover">
 			<thead>
 				<tr>
 					<th>
-						Nombre
-					</th>
-					<th>
-						Apellido
+						Apellido(s) y Nombre(s)
 					</th>
 					<th>
 						CUIL/CUIT
@@ -42,16 +39,16 @@
 					<th>
 						Fecha de carga
 					</th>
+					<th>
+						Acciones
+					</th>
 				</tr>
 			</thead>
 			<tbody>
 				@foreach($personas as $persona)
 				<tr>
 					<td>
-						{{ $persona->nombre }}
-					</td>
-					<td>
-						{{ $persona->apellido }}
+						{{ $persona->apellido }}, {{ $persona->nombre }}
 					</td>
 					<td>
 						{{ $persona->cuil_cuit }}
@@ -63,7 +60,7 @@
 						{{ $persona->telefono }}
 					</td>
 					<td>
-						{{ $persona->fecha_carga }}
+						{{ Carbon\Carbon::parse($persona->fecha_carga)->format('d/m/Y') }}
 					</td>
 					<td>
 						<div class="btn-group">
