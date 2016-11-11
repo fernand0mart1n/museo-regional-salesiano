@@ -12,9 +12,13 @@
 
 @section('content')
 	<div class="col-md-offset-1 col-md-10">
+		<ol class="breadcrumb">
+	        <li><a href="{{ url('/') }}">Inicio</a></li>
+	        <li class="active">Clasificaciones</a></li>
+	    </ol>
 		<h3>Clasificaciones</h3>
 		<a href="{{url('/clasificaciones/create')}}" class="btn btn-primary">
-			<i class="glyphicon glyphicon-plus"></i> Cargar clasificacion
+			<i class="glyphicon glyphicon-plus"></i> Cargar clasificación
 		</a>
 		<hr>
 		<table class="table">

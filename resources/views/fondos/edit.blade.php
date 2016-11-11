@@ -18,9 +18,9 @@
 	        <li class="active">Fondo {{ $fondo->id }}</li>
 	    </ol>
 	    <div class="page-header text-center">
-	        <h2>
+	        <h3>
 	            Editar fondo {{ $fondo->id }}<small>.</small>
-	        </h2>
+	        </h3>
 	    </div>
 
 	    <?= Former::open()

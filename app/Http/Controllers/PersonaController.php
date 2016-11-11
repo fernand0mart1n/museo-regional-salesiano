@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+use Auth;
+use App\Persona;
 
 class PersonaController extends Controller
 {
@@ -13,7 +15,15 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check()){
+
+            $personas = Persona::all();
+
+            return view("personas.index", compact("personas"));
+
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -23,7 +33,11 @@ class PersonaController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::check()){    
+            return view('personas.create');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -34,7 +48,13 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::check()){
+            $persona = Request::all();
+            Persona::create($persona);
+            return redirect('personas');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -45,7 +65,12 @@ class PersonaController extends Controller
      */
     public function show($id)
     {
-        //
+        if(Auth::check()){
+            $persona = Persona::find($id);
+            return view('personas.show',compact('Persona'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -56,7 +81,12 @@ class PersonaController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::check()){
+            $persona = Persona::find($id);
+            return view('personas.edit',compact('Persona'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -68,7 +98,14 @@ class PersonaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(Auth::check()){
+            $personaUpdate = Request::all();
+            $persona = Persona::find($id);
+            $persona->update($personaUpdate);
+            return redirect('personas');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -79,6 +116,11 @@ class PersonaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if(Auth::check()){
+            Persona::find($id)->delete();
+            return redirect('personas');
+        } else {
+            return view('auth.login');
+        }
     }
 }
