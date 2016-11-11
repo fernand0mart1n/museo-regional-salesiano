@@ -13,8 +13,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        Museo
+                    <a class="navbar-left" href="{{ url('/') }}">
+                        <img src="{{ asset('images/logo.png') }}">
                     </a>
                 </div>
 

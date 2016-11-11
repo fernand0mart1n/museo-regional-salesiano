@@ -15,11 +15,11 @@
 		<ol class="breadcrumb">
 	        <li><a href="{{ url('/') }}">Inicio</a></li>
 	        <li><a href="{{ route('personas.index') }}">Personas</a></li>
-	        <li class="active">Persona {{ $persona->id }}</li>
+	        <li class="active">{{ $persona->nombre }} {{ $persona->apellido }}</li>
 	    </ol>
 	    <div class="page-header text-center">
 	        <h3>
-	            Ver persona {{ $persona->id }}<small>.</small>
+	            {{ $persona->nombre }} {{ $persona->apellido }}<small>.</small>
 	        </h3>
 	    </div>
 	    <?= Former::open()
