@@ -14,7 +14,9 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index');
+Route::get('/datos', 'HomeController@datos');
 
 Route::resource('fondos','FondoController');
 Route::resource('clasificaciones','ClasificacionController');
 Route::resource('personas','PersonaController');
+Route::resource('revisiones','RevisionController');

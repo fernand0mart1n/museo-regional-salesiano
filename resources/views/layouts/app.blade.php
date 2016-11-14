@@ -13,8 +13,8 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-left" href="{{ url('/') }}">
-                        <img src="{{ asset('images/logo.png') }}">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        Museo Regional Salesiano
                     </a>
                 </div>
 
@@ -38,6 +38,9 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
+                                        <a href="{{ url('/datos') }}">
+                                            Mis datos
+                                        </a>
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

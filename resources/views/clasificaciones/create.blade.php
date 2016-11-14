@@ -42,7 +42,7 @@
 
 	        <?= Former::text('usuario')
 	        ->label('Cargado por')
-	        ->value( Auth::user()->name )
+	        ->placeholder( Auth::user()->name )
 	        ->disabled() ?>
 
 	        <?= Former::date('fecha_carga')

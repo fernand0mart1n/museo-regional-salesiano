@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use App\User;
+use App\Persona;
 
 class HomeController extends Controller
 {
@@ -26,6 +28,17 @@ class HomeController extends Controller
     {
         if(Auth::check()){
             return view('home');    
+        } else {
+            return view('auth.login');
+        }
+    }
+
+    public function datos()
+    {
+        if(Auth::check()){
+            $usuario = User::find(Auth::user()->id);
+            $persona = Persona::find($usuario->persona);
+            return view('datos', compact('usuario', 'persona'));    
         } else {
             return view('auth.login');
         }

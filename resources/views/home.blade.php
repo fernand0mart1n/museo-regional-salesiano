@@ -21,6 +21,7 @@
                         <li><a href="{{ route('fondos.index') }}">Ir a fondos</a></li>
                         <li><a href="{{ route('clasificaciones.index') }}">Ir a clasificaciones</a></li>
                         <li><a href="{{ route('personas.index') }}">Ir a personas</a></li>
+                        <li><a href="{{ route('revisiones.index') }}">Ir a revisiones</a></li>
                     </ul>
                 </div>
             </div>
