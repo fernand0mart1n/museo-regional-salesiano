@@ -20,3 +20,4 @@ Route::resource('fondos','FondoController');
 Route::resource('clasificaciones','ClasificacionController');
 Route::resource('personas','PersonaController');
 Route::resource('revisiones','RevisionController');
+Route::resource('piezas','PiezaController');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+use Auth;
+use App\Pieza;
 
 class PiezaController extends Controller
 {
@@ -13,7 +15,15 @@ class PiezaController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::check()){
+
+            $piezas = Pieza::all();
+
+            return view("piezas.index", compact("piezas"));
+
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -23,7 +33,11 @@ class PiezaController extends Controller
      */
     public function create()
     {
-        //
+        if(Auth::check()){    
+            return view('piezas.create');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -34,7 +48,13 @@ class PiezaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(Auth::check()){
+            $pieza = Request::all();
+            Pieza::create($pieza);
+            return redirect('piezas');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -45,7 +65,12 @@ class PiezaController extends Controller
      */
     public function show($id)
     {
-        //
+        if(Auth::check()){
+            $pieza = Pieza::find($id);
+            return view('piezas.show',compact('pieza'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -56,7 +81,12 @@ class PiezaController extends Controller
      */
     public function edit($id)
     {
-        //
+        if(Auth::check()){
+            $pieza = Pieza::find($id);
+            return view('piezas.edit',compact('pieza'));
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -68,7 +98,14 @@ class PiezaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if(Auth::check()){
+            $piezaUpdate = Request::all();
+            $pieza = Pieza::find($id);
+            $pieza->update($piezaUpdate);
+            return redirect('piezas');
+        } else {
+            return view('auth.login');
+        }
     }
 
     /**
@@ -77,8 +114,13 @@ class PiezaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function desproy($id)
     {
-        //
+        if(Auth::check()){
+            Pieza::find($id)->delete();
+            return redirect('piezas');
+        } else {
+            return view('auth.login');
+        }
     }
 }

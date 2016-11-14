@@ -27,7 +27,9 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::check()){
-            return view('home');    
+            $usuario = User::find(Auth::user()->id);
+            $persona = Persona::find($usuario->persona);
+            return view('home', compact('usuario', 'persona'));    
         } else {
             return view('auth.login');
         }

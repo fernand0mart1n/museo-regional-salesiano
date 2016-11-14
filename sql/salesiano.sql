@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-11-2016 a las 16:47:47
+-- Tiempo de generación: 14-11-2016 a las 16:35:20
 -- Versión del servidor: 5.7.16-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.8-0ubuntu0.16.04.3
 
@@ -84,7 +84,8 @@ CREATE TABLE `fondos` (
 --
 
 INSERT INTO `fondos` (`id`, `descripcion`, `usuario_carga`, `fecha_carga`) VALUES
-(3, 'asdasd', 1, '2016-11-05');
+(3, 'asdasd', 1, '2016-11-05'),
+(4, '2do fondo', 1, '2014-11-29');
 
 -- --------------------------------------------------------
 
@@ -145,13 +146,21 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 
 CREATE TABLE `personas` (
   `id` int(10) UNSIGNED NOT NULL,
-  `nombre` varchar(45) DEFAULT NULL,
-  `apellido` varchar(45) DEFAULT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `apellido` varchar(45) NOT NULL,
   `cuil_cuit` varchar(13) DEFAULT NULL,
   `domicilio` varchar(45) DEFAULT NULL,
   `telefono` varchar(45) DEFAULT NULL,
-  `fecha_carga` date DEFAULT NULL
+  `fecha_carga` date DEFAULT NULL,
+  `sexo` enum('Masculino','Femenino') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `personas`
+--
+
+INSERT INTO `personas` (`id`, `nombre`, `apellido`, `cuil_cuit`, `domicilio`, `telefono`, `fecha_carga`, `sexo`) VALUES
+(2, 'Montoto', 'Flores', '29-36343242-2', 'Siempreviva 123', '28044213123', '2014-10-30', 'Masculino');
 
 -- --------------------------------------------------------
 
@@ -169,6 +178,13 @@ CREATE TABLE `piezas` (
   `tema` varchar(100) DEFAULT NULL,
   `observacion` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `piezas`
+--
+
+INSERT INTO `piezas` (`id`, `descripcion`, `clasificacion`, `procedencia`, `autor`, `fecha_ejecucion`, `tema`, `observacion`) VALUES
+(1, 'Prueba', 3, 'Prueba', 'PRUBA', '2016-11-14', 'PRUEBA', 'PRUE BA');
 
 -- --------------------------------------------------------
 
@@ -207,7 +223,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `persona`, `created_at`, `updated_at`) VALUES
-(1, 'valdesoft', 'fmvaldebenito@udc.edu.ar', '$2y$10$E0XFxlHRiWTzC5uhfo7AsOtopVplaEJv6VrJlLVhKiqFBDWwWlwpO', 'Qja2UN70EkohjjwqAjzwgQnE1Mt8euuEOXM5SBhpsmBBrhbDOQUCt8ztICvC', NULL, '2016-11-04 20:24:39', '2016-11-09 22:39:07');
+(1, 'valdesoft', 'fmvaldebenito@udc.edu.ar', '$2y$10$E0XFxlHRiWTzC5uhfo7AsOtopVplaEJv6VrJlLVhKiqFBDWwWlwpO', 'krBGPCZ5xI3WzW3kMllzESpczAswn6Ap5CastWZcauqKq44sMpC8qg6L5IDh', 2, '2016-11-04 20:24:39', '2016-11-14 20:29:01');
 
 --
 -- Índices para tablas volcadas
@@ -315,7 +331,7 @@ ALTER TABLE `donantes`
 -- AUTO_INCREMENT de la tabla `fondos`
 --
 ALTER TABLE `fondos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `fotos`
 --
@@ -330,12 +346,12 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `personas`
 --
 ALTER TABLE `personas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `piezas`
 --
 ALTER TABLE `piezas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `revisiones`
 --

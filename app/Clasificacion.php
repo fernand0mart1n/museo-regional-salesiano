@@ -20,4 +20,8 @@ class Clasificacion extends Model
     public function fondo() {
         return $this->hasOne('App\Fondo','id','fondo_id');
     }
+
+    public function pieza() {
+        return $this->belongsTo('App\Pieza');
+    }
 }

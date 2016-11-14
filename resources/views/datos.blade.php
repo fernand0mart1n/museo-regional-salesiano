@@ -16,7 +16,13 @@
                 <div class="panel-heading">Mis datos</div>
 
                 <div class="panel-body">
-                    Bienvenido/a {{ $persona->nombre }}
+                    @if($persona->sexo == 'Masculino')
+                        Bienvenido 
+                    @else
+                        Bienvenida
+                    @endif
+                    
+                    {{ $persona->nombre }}
                     <h6>Datos de usuario</h6>
                     <ul>
                         <p>Nombre de usuario: {{ $usuario->name }}</p>
