@@ -1,5 +1,3 @@
-@include('layouts.app')
-
 @extends('layouts.layout')
 
 @section('titulo', ' - Nueva revisión')
@@ -10,60 +8,63 @@
 
 @endsection
 
-@section('content')
-	<div class="col-md-offset-1 col-md-10">
-		<ol class="breadcrumb">
-	        <li><a href="{{ url('/') }}">Inicio</a></li>
-	        <li><a href="{{ route('revisiones.index') }}">Revisiones</a></li>
-	        <li class="active">Nueva revisión</li>
-	    </ol>
-	    <div class="page-header text-center">
-	        <h3>
-	            Nueva revisión<small>.</small>
-	        </h3>
-	    </div>
+@section('navbar')
 
-	    <?= Former::open()
-        ->method('POST')
-        ->route('revisiones.store') ?>
+	@include('layouts.app')
 
-        	<?= Former::hidden('usuario_revision')
-	        ->label('')
-	        ->value( Auth::user()->id )
-	        ->readonly() ?>
+	@section('content')
+	<ol class="breadcrumb">
+        <li><a href="{{ url('/') }}">Inicio</a></li>
+        <li><a href="{{ route('revisiones.index') }}">Revisiones</a></li>
+        <li class="active">Nueva revisión</li>
+    </ol>
+    <div class="page-header text-center">
+        <h3>
+            Nueva revisión<small>.</small>
+        </h3>
+    </div>
 
-	        <?= Former::text('usuario')
-	        ->label('Cargado por')
-	        ->placeholder( Auth::user()->name )
-	        ->disabled() ?>
+    <?= Former::open()
+    ->method('POST')
+    ->route('revisiones.store') ?>
 
-	        <?= Former::select('pieza')
-	        ->fromQuery(App\Pieza::all(), 'descripcion', 'id') ?>
+    	<?= Former::hidden('usuario_revision')
+        ->label('')
+        ->value( Auth::user()->id )
+        ->readonly() ?>
 
-	        <?= Former::date('fecha_revision')
-	        ->label('Fecha de carga') ?>
+        <?= Former::text('usuario')
+        ->label('Cargado por')
+        ->placeholder( Auth::user()->name )
+        ->disabled() ?>
 
-	        <?= Former::textarea('estado_conservacion')
-	        ->label('Estado de conservación')
-	        ->placeholder('Estado de conservación') ?>
+        <?= Former::select('pieza')
+        ->fromQuery(App\Pieza::all(), 'descripcion', 'id') ?>
 
-	        <?= Former::textarea('ubicacion')
-	        ->label('Ubicación')
-	        ->placeholder('Ubicación') ?>
+        <?= Former::date('fecha_revision')
+        ->label('Fecha de carga') ?>
 
-	        <div class="form-group">
-		        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
-		        	<a href="{{ route('revisiones.index') }}" class="btn btn-default">
-		        		<i class="glyphicon glyphicon-chevron-left"></i> Volver
-		        	</a>
+        <?= Former::textarea('estado_conservacion')
+        ->label('Estado de conservación')
+        ->placeholder('Estado de conservación') ?>
 
-		        	<?= Former::button()
-	            	->type('submit')
-	            	->value('Cargar <i class="glyphicon glyphicon glyphicon-plus"></i>')
-	            	->class('btn btn-primary pull-right') ?>
-	            </div>
-	        </div>
+        <?= Former::textarea('ubicacion')
+        ->label('Ubicación')
+        ->placeholder('Ubicación') ?>
 
-	    <?= Former::close() ?>
-	</div>
-@stop
+        <div class="form-group">
+	        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
+	        	<a href="{{ route('revisiones.index') }}" class="btn btn-default">
+	        		<i class="glyphicon glyphicon-chevron-left"></i> Volver
+	        	</a>
+
+	        	<?= Former::button()
+            	->type('submit')
+            	->value('Cargar <i class="glyphicon glyphicon glyphicon-plus"></i>')
+            	->class('btn btn-primary pull-right') ?>
+            </div>
+        </div>
+
+    <?= Former::close() ?>
+	@endsection
+@endsection

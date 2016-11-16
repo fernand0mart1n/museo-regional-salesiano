@@ -1,5 +1,3 @@
-@include('layouts.app')
-
 @extends('layouts.layout')
 
 @section('titulo', ' - Cargar persona')
@@ -10,56 +8,59 @@
 
 @endsection
 
-@section('content')
-	<div class="col-md-offset-1 col-md-10">
-		<ol class="breadcrumb">
-	        <li><a href="{{ url('/') }}">Inicio</a></li>
-	        <li><a href="{{ route('personas.index') }}">Personas</a></li>
-	        <li class="active">Cargar persona</li>
-	    </ol>
-	    <div class="page-header text-center">
-	        <h3>
-	            Cargar persona<small>.</small>
-	        </h3>
-	    </div>
+@section('navbar')
 
-	    <?= Former::open()
-        ->method('POST')
-        ->route('personas.store') ?>
+	@include('layouts.app')
 
-	        <?= Former::text('nombre')
-	        ->placeholder('Nombre') ?>
+	@section('content')
+	<ol class="breadcrumb">
+        <li><a href="{{ url('/') }}">Inicio</a></li>
+        <li><a href="{{ route('personas.index') }}">Personas</a></li>
+        <li class="active">Cargar persona</li>
+    </ol>
+    <div class="page-header text-center">
+        <h3>
+            Cargar persona<small>.</small>
+        </h3>
+    </div>
 
-	        <?= Former::text('apellido')
-	        ->placeholder('Apellido') ?>
+    <?= Former::open()
+    ->method('POST')
+    ->route('personas.store') ?>
 
-	        <?= Former::text('cuil_cuit')
-	        ->label('CUIL/CUIT')
-	        ->placeholder('CUIL/CUIT') ?>
+        <?= Former::text('nombre')
+        ->placeholder('Nombre') ?>
 
-	        <?= Former::text('domicilio')
-	        ->placeholder('Domicilio') ?>
+        <?= Former::text('apellido')
+        ->placeholder('Apellido') ?>
 
-	        <?= Former::text('telefono')
-	        ->label('Teléfono')
-	        ->placeholder('Teléfono') ?>
+        <?= Former::text('cuil_cuit')
+        ->label('CUIL/CUIT')
+        ->placeholder('CUIL/CUIT') ?>
 
-	        <?= Former::date('fecha_carga')
-	        ->label('Fecha de carga') ?>
+        <?= Former::text('domicilio')
+        ->placeholder('Domicilio') ?>
 
-	        <div class="form-group">
-		        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
-		        	<a href="{{ route('personas.index') }}" class="btn btn-default">
-		        		<i class="glyphicon glyphicon-chevron-left"></i> Volver
-		        	</a>
+        <?= Former::text('telefono')
+        ->label('Teléfono')
+        ->placeholder('Teléfono') ?>
 
-		        	<?= Former::button()
-	            	->type('submit')
-	            	->value('Guardar <i class="glyphicon glyphicon glyphicon-plus"></i>')
-	            	->class('btn btn-primary pull-right') ?>
-	            </div>
-	        </div>
+        <?= Former::date('fecha_carga')
+        ->label('Fecha de carga') ?>
 
-	    <?= Former::close() ?>
-	</div>
-@stop
+        <div class="form-group">
+	        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
+	        	<a href="{{ route('personas.index') }}" class="btn btn-default">
+	        		<i class="glyphicon glyphicon-chevron-left"></i> Volver
+	        	</a>
+
+	        	<?= Former::button()
+            	->type('submit')
+            	->value('Guardar <i class="glyphicon glyphicon glyphicon-plus"></i>')
+            	->class('btn btn-primary pull-right') ?>
+            </div>
+        </div>
+
+    <?= Former::close() ?>
+	@endsection
+@endsection
