@@ -9,6 +9,19 @@
     </head>
     <body>
         @yield('navbar')
-        @yield('content')
+
+        <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+
+            @yield('breadcumbs')
+
+            @yield('content')
+
+            
+                    <!-- /.row --> </div>
+                <!-- /.container-fluid --> </div>
+            <!-- /#page-wrapper -->
+        </div>
     </body>
 </html>
