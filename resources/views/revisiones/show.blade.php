@@ -32,8 +32,9 @@
         ->placeholder( Auth::user()->name )
         ->readonly() ?>
 
-        <?= Former::select('pieza')
-        ->fromQuery(App\Pieza::all(), 'descripcion', 'id') ?>
+        <?= Former::textarea('pieza')
+        ->placeholder($revision->pieza->descripcion)
+        ->readonly ?>
 
         <?= Former::date('fecha_revision')
         ->value($revision->fecha_revision)

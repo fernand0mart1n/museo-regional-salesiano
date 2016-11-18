@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Persona;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -27,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -48,7 +49,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|unique:users',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
@@ -62,10 +63,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $persona = Persona::create([
+            'nombre' => $data['nombre'],
+            'apellido' => $data['apellido'],
+            'cuil_cuit' => $data['cuil_cuit'],
+            'domicilio' => $data['domicilio'],
+            'telefono' => $data['telefono'],
+            'fecha_carga' => $data['fecha_carga']
+        ]);
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'persona' => $persona->id
         ]);
     }
 }

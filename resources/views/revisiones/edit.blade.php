@@ -34,7 +34,8 @@
         ->readonly() ?>
 
         <?= Former::select('pieza')
-        ->fromQuery(App\Pieza::all(), 'descripcion', 'id') ?>
+        ->fromQuery(App\Pieza::all(), 'descripcion', 'id')
+        ->value($revision->pieza->descripcion) ?>
 
         <?= Former::date('fecha_revision')
         ->value($revision->fecha_revision)

@@ -35,6 +35,7 @@
 
         <?= Former::select('fondo_id')
         ->label('Pertenece al fondo')
+        ->value($clasificacion->fondo_id)
         ->fromQuery(App\Fondo::all(), 'descripcion', 'id') ?>
 
         <?= Former::text('usuario')

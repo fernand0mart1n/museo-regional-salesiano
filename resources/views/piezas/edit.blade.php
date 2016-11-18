@@ -36,6 +36,7 @@
 
         <?= Former::select('clasif')
         ->label('Clasificación')
+        ->value($pieza->clasif->descripcion)
         ->required()
         ->fromQuery(App\Clasificacion::all(), 'descripcion', 'id') ?>
 

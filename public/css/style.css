@@ -526,10 +526,7 @@ p.change_link{
 	margin: 0 0 35px 0;
 	background:rgba(52, 53, 49, 0.58);
 }
-#register{	
-	z-index: 21;
-	opacity: 0;
-}
+
 #login{
 	z-index: 22;
 }
