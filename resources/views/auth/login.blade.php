@@ -17,7 +17,7 @@
                 <h2> Ingresar </h2> 
                 <p> 
                     <!--div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}"-->
-                    <label for="username" class="uname" data-icon="u" ><span>Nombre de usuario</span></label>
+                    <label for="username" class="uname" data-icon="" ><span>Nombre de usuario</span></label>
                     <input id="name" name="name" required="required" value="{{ old('username') }}" type="text" placeholder="Usuario"/>
 
                     @if ($errors->has('username'))
@@ -28,7 +28,7 @@
                 </p>
                 <p> 
                     <!--div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}"-->
-                    <label for="password" class="youpasswd" data-icon="p"><span>Contraseña</span></label>
+                    <label for="password" class="youpasswd" data-icon=""><span>Contraseña</span></label>
                     <input id="password" name="password" required="required" type="password" placeholder="Contraseña" /> 
                     @if ($errors->has('password'))
                         <span class="help-block">

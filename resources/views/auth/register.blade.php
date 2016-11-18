@@ -3,7 +3,6 @@
 @section('head')
 
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
-<link href="{{ asset('css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" media="all" />
 
 @endsection
 
@@ -63,10 +62,10 @@
 
                 <label for="sexo">Sexo</label><br>
                 <input type="checkbox" name="sexo" value="Masculino">
-                <label for="sexo"><span>Masculino <i class="fa fa-male"></i></span></label><br>
+                <label for="sexo"><span><i class="fa fa-male"></i></span></label><br>
                  
                 <input type="checkbox" name="sexo" value="Car">
-                <label for="sexo"><span>Femenino <i class="fa fa-female"></i></span></label><br><br>
+                <label for="sexo"><span><i class="fa fa-female"></i></span></label><br><br>
 
                 <p> 
                     <label for="cuil_cuit" data-icon=""><span>CUIL/CUIT</span></label>

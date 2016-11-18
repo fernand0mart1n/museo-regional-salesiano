@@ -22,7 +22,7 @@
                 <h2> Recuperar contraseña </h2> 
                 <p> 
                     <!--<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">-->
-                    <label for="email" class="uname" data-icon="e"><span>E-Mail</span></label>
+                    <label for="email" class="uname" data-icon=""><span>E-Mail</span></label>
                     <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required placeholder="Email">
 
                     @if ($errors->has('email'))
