@@ -29,6 +29,9 @@
 					Apellido(s) y nombre(s)
 				</th>
 				<th>
+					Estado
+				</th>
+				<th>
 					Fecha de carga
 				</th>
 				<th>
@@ -44,6 +47,13 @@
 				</td>
 				<td> 
 					{{ $usuario->person->apellido }}, {{ $usuario->person->nombre }}
+				</td>
+				<td class="td-icon">
+					@if($usuario->estado)
+						<i class="fa fa-check"></i>
+					@else
+						<i class="fa fa-remove"></i>
+					@endif
 				</td>
 				<td>
 					{{ Carbon\Carbon::parse($usuario->person->fecha_carga)->format('d/m/Y') }}

@@ -1,20 +1,20 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
+-- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 22-11-2016 a las 01:48:17
--- Versión del servidor: 5.7.16-0ubuntu0.16.04.1
--- Versión de PHP: 7.0.8-0ubuntu0.16.04.3
+-- Tiempo de generación: 22-11-2016 a las 12:03:25
+-- Versión del servidor: 5.5.53
+-- Versión de PHP: 5.6.23-1+deprecated+dontuse+deb.sury.org~precise+1
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Base de datos: `salesiano`
@@ -26,20 +26,23 @@ SET time_zone = "+00:00";
 -- Estructura de tabla para la tabla `clasificaciones`
 --
 
-CREATE TABLE `clasificaciones` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `clasificaciones` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(200) DEFAULT NULL,
-  `fondo_id` int(10) UNSIGNED NOT NULL,
-  `usuario_carga` int(10) UNSIGNED NOT NULL,
-  `fecha_carga` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fondo_id` int(10) unsigned NOT NULL,
+  `usuario_carga` int(10) unsigned NOT NULL,
+  `fecha_carga` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_clasificaciones_users1_idx` (`usuario_carga`),
+  KEY `fk_clasificaciones_fondo1_idx` (`fondo_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `clasificaciones`
 --
 
 INSERT INTO `clasificaciones` (`id`, `descripcion`, `fondo_id`, `usuario_carga`, `fecha_carga`) VALUES
-(3, 'efaasfsaasasf', 4, 1, '2016-11-18');
+(1, 'Clasificación de prueba', 1, 1, '2016-11-15');
 
 -- --------------------------------------------------------
 
@@ -47,12 +50,15 @@ INSERT INTO `clasificaciones` (`id`, `descripcion`, `fondo_id`, `usuario_carga`,
 -- Estructura de tabla para la tabla `donaciones`
 --
 
-CREATE TABLE `donaciones` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `donante` int(10) UNSIGNED NOT NULL,
-  `pieza` int(10) UNSIGNED NOT NULL,
-  `fecha_donacion` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `donaciones` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `donante` int(10) unsigned NOT NULL,
+  `pieza` int(10) unsigned NOT NULL,
+  `fecha_donacion` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_donaciones_donantes1_idx` (`donante`),
+  KEY `fk_donaciones_piezas1_idx` (`pieza`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -60,11 +66,13 @@ CREATE TABLE `donaciones` (
 -- Estructura de tabla para la tabla `donantes`
 --
 
-CREATE TABLE `donantes` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `persona` int(10) UNSIGNED NOT NULL,
-  `fecha_carga_donante` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `donantes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `persona` int(10) unsigned NOT NULL,
+  `fecha_carga_donante` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_donantes_personas1_idx` (`persona`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -72,20 +80,21 @@ CREATE TABLE `donantes` (
 -- Estructura de tabla para la tabla `fondos`
 --
 
-CREATE TABLE `fondos` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `fondos` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(200) DEFAULT NULL,
-  `usuario_carga` int(10) UNSIGNED NOT NULL,
-  `fecha_carga` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `usuario_carga` int(10) unsigned NOT NULL,
+  `fecha_carga` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_fondo_users1_idx` (`usuario_carga`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `fondos`
 --
 
 INSERT INTO `fondos` (`id`, `descripcion`, `usuario_carga`, `fecha_carga`) VALUES
-(3, 'asdasd', 1, '2016-11-05'),
-(4, '2do fondo', 1, '2014-11-29');
+(1, 'Fondo de prueba', 1, '2016-11-22');
 
 -- --------------------------------------------------------
 
@@ -93,11 +102,13 @@ INSERT INTO `fondos` (`id`, `descripcion`, `usuario_carga`, `fecha_carga`) VALUE
 -- Estructura de tabla para la tabla `fotos`
 --
 
-CREATE TABLE `fotos` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `pieza` int(10) UNSIGNED NOT NULL,
-  `foto` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE IF NOT EXISTS `fotos` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pieza` int(10) unsigned NOT NULL,
+  `foto` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_fotos_piezas1_idx` (`pieza`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -105,11 +116,12 @@ CREATE TABLE `fotos` (
 -- Estructura de tabla para la tabla `migrations`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Volcado de datos para la tabla `migrations`
@@ -126,10 +138,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Estructura de tabla para la tabla `password_resets`
 --
 
-CREATE TABLE `password_resets` (
+CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -137,8 +151,7 @@ CREATE TABLE `password_resets` (
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('fmvaldebenito@udc.edu.ar', '76e7c6afe8e26e643391d3bc7f9c37d1388600fce72e6a69c78b49465c55ab08', '2016-11-09 22:39:35'),
-('flopi@yopmail.com', '4c786ee2822bf4aedd32badc0769da94b04709e425336ef2986c98f1e0199b06', '2016-11-18 06:48:27');
+('museoregionalsalesiano@gmail.com', '7580894d135f2d0dfbfbbdabdc87ac870e1063175ec033a12af8eb7676000d28', '2016-11-22 17:05:39');
 
 -- --------------------------------------------------------
 
@@ -146,14 +159,16 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 -- Estructura de tabla para la tabla `permissions`
 --
 
-CREATE TABLE `permissions` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `permissions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `display_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `permissions_name_unique` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -161,9 +176,11 @@ CREATE TABLE `permissions` (
 -- Estructura de tabla para la tabla `permission_role`
 --
 
-CREATE TABLE `permission_role` (
-  `permission_id` int(10) UNSIGNED NOT NULL,
-  `role_id` int(10) UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `permission_role` (
+  `permission_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`role_id`),
+  KEY `permission_role_role_id_foreign` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -172,32 +189,24 @@ CREATE TABLE `permission_role` (
 -- Estructura de tabla para la tabla `personas`
 --
 
-CREATE TABLE `personas` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `personas` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `apellido` varchar(45) NOT NULL,
   `cuil_cuit` varchar(13) DEFAULT NULL,
   `domicilio` varchar(45) DEFAULT NULL,
   `telefono` varchar(45) DEFAULT NULL,
   `fecha_carga` date DEFAULT NULL,
-  `sexo` enum('Masculino','Femenino') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `sexo` enum('Masculino','Femenino') DEFAULT 'Masculino',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `personas`
 --
 
 INSERT INTO `personas` (`id`, `nombre`, `apellido`, `cuil_cuit`, `domicilio`, `telefono`, `fecha_carga`, `sexo`) VALUES
-(2, 'Montoto', 'Flores', '29-36343242-2', 'Siempreviva 123', '28044213123', '2014-10-30', 'Masculino'),
-(3, 'Pepe', 'Argento', '2312323131', 'B° 2 de abril Edificio 7 escalera 1 depto. A', '1412441241124', '2016-12-31', 'Femenino'),
-(4, 'pepote', 'argento', '2312323131', 'B° 2 de abril Edificio 7 escalera 1 depto. A', '28044213123', '2016-11-18', 'Masculino'),
-(5, 'asd', 'asd', '2312323131', 'B° 2 de abril Edificio 7 escalera 1 depto. A', '28044213123', '2016-11-18', 'Masculino'),
-(6, 'asdddd', 'ddddddddd', '2312323131', 'B° 2 de abril Edificio 7 escalera 1 depto. A', '28044213123', '2016-11-18', 'Masculino'),
-(7, 'asdddd', 'ddddddddd', '2312323131', 'B° 2 de abril Edificio 7 escalera 1 depto. A', '28044213123', '2016-11-18', 'Masculino'),
-(8, 'asdddd', 'ddddddddd', '2312323131', 'B° 2 de abril Edificio 7 escalera 1 depto. A', '28044213123', '2016-11-18', 'Masculino'),
-(9, 'Montotods', 'ddsdsa', '2312323131', 'Siempreviva 123', '28044213123', '2016-11-18', 'Masculino'),
-(10, 'sas', 'sas', '2312323131', 'B° 2 de abril Edificio 7 escalera 1 depto. A', '31231231212', '2016-11-18', 'Masculino'),
-(11, 'asdasd', 'asdasda', '29-36343242-2', 'Siempreviva 123', '1412441241124', '2016-11-07', 'Masculino');
+(1, 'Museo Regional', 'Salesiano', '00-00000000-0', 'Don Bosco 248', '280 448-2623', '2016-11-22', 'Masculino');
 
 -- --------------------------------------------------------
 
@@ -205,23 +214,18 @@ INSERT INTO `personas` (`id`, `nombre`, `apellido`, `cuil_cuit`, `domicilio`, `t
 -- Estructura de tabla para la tabla `piezas`
 --
 
-CREATE TABLE `piezas` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `piezas` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(200) DEFAULT NULL,
-  `clasificacion` int(10) UNSIGNED NOT NULL,
+  `clasificacion` int(10) unsigned NOT NULL,
   `procedencia` varchar(100) DEFAULT NULL,
   `autor` varchar(100) DEFAULT NULL,
   `fecha_ejecucion` date DEFAULT NULL,
   `tema` varchar(100) DEFAULT NULL,
-  `observacion` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `piezas`
---
-
-INSERT INTO `piezas` (`id`, `descripcion`, `clasificacion`, `procedencia`, `autor`, `fecha_ejecucion`, `tema`, `observacion`) VALUES
-(1, 'Prueba', 3, 'Prueba', 'PRUBA', '2016-11-14', 'PRUEBA', 'PRUE BA');
+  `observacion` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_piezas_clasificaciones1_idx` (`clasificacion`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -229,14 +233,17 @@ INSERT INTO `piezas` (`id`, `descripcion`, `clasificacion`, `procedencia`, `auto
 -- Estructura de tabla para la tabla `revisiones`
 --
 
-CREATE TABLE `revisiones` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `usuario_revision` int(10) UNSIGNED DEFAULT NULL,
-  `pieza` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `revisiones` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `usuario_revision` int(10) unsigned DEFAULT NULL,
+  `pieza` int(10) unsigned NOT NULL,
   `fecha_revision` date DEFAULT NULL,
   `estado_conservacion` varchar(100) DEFAULT NULL,
-  `ubicacion` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ubicacion` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_revisiones_users1_idx` (`usuario_revision`),
+  KEY `fk_revisiones_piezas1_idx` (`pieza`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -244,14 +251,24 @@ CREATE TABLE `revisiones` (
 -- Estructura de tabla para la tabla `roles`
 --
 
-CREATE TABLE `roles` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `display_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `roles_name_unique` (`name`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `roles`
+--
+
+INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'Administrador', 'Tiene acceso total', '2016-11-22 11:47:46', '2016-11-22 11:47:46'),
+(2, 'operador', 'Operador', 'Registra y actualiza datos', '2016-11-22 11:48:43', '2016-11-22 11:48:43');
 
 -- --------------------------------------------------------
 
@@ -259,9 +276,11 @@ CREATE TABLE `roles` (
 -- Estructura de tabla para la tabla `role_user`
 --
 
-CREATE TABLE `role_user` (
-  `user_id` int(10) UNSIGNED NOT NULL,
-  `role_id` int(10) UNSIGNED NOT NULL
+CREATE TABLE IF NOT EXISTS `role_user` (
+  `user_id` int(10) unsigned NOT NULL,
+  `role_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`user_id`,`role_id`),
+  KEY `role_user_role_id_foreign` (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -270,208 +289,28 @@ CREATE TABLE `role_user` (
 -- Estructura de tabla para la tabla `users`
 --
 
-CREATE TABLE `users` (
-  `id` int(10) UNSIGNED NOT NULL,
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `persona` int(10) UNSIGNED DEFAULT NULL,
+  `persona` int(10) unsigned DEFAULT NULL,
+  `estado` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`),
+  KEY `fk_users_personas_idx` (`persona`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `persona`, `created_at`, `updated_at`) VALUES
-(1, 'valdesoft', 'fmvaldebenito@udc.edu.ar', '$2y$10$E0XFxlHRiWTzC5uhfo7AsOtopVplaEJv6VrJlLVhKiqFBDWwWlwpO', '2jGSHD4NeMlMPPOJZbMaJK5EeGmblodiNRyZ4Klek8mRzmN8eQpWKhJ00X8I', 2, '2016-11-04 20:24:39', '2016-11-18 07:07:07'),
-(2, 'flopi', 'flopi@yopmail.com', '$2y$10$5L3Vay4mZPu1EjxAuqp0UOiY3iWpfTvrimCjRADwWM3sQ0vjpkucK', 'VNKWYngn0QTCUfIYBII8WAhULEG6BsrqGPG1h9iZ5VmEy4PTZU7ebuFN4pXq', 2, '2016-11-18 06:27:45', '2016-11-18 06:31:49'),
-(3, 'valdesoft', 'flo2pi@yopmail.com', '$2y$10$.gWEmZ6MRVbOlxjw26nOoe7/VS0Ums6hs49hh0FcgII.tEDbuIVpK', 'BU199nzDtdgvljdL5Stqyf6YTpefpQ04HqaBaRW63sJmCNBa4g6HBhkWvL03', 2, '2016-11-18 06:36:24', '2016-11-18 06:37:00'),
-(4, 'ASAFF', 'SAFSFAFAS@ASDASCA.SA', '$2y$10$6zjbM.J6ZQUg1ild7zr4lec2NzLqBZmAmHtn6mt0Kd1MAzCwuSPru', 'CQe9dvk0nWQcDAuXwJoyfmJwsteLUc4oZEfnrNPgONjgjICt4aBQ7DXLImAU', 2, '2016-11-18 06:37:30', '2016-11-18 06:37:48'),
-(5, 'pepito', 'pepito@udc.edu.ar', '$2y$10$OI3kEIU3pF2zagUJoNBMMegt.zgpbZCU0M.Th04ibRIXsUlKMICwO', 'mam8lUj5gMLu6BbJEb3LWHtyIOybBCUFSLWYzo7oSDh25IajUfD6b6jvrLvj', 3, '2016-11-18 07:08:36', '2016-11-18 07:18:22'),
-(6, 'pepote', 'pepote@udc.edu.ar', '$2y$10$I3ylq1kgSQWUjFfafrdaL.DuB7.gtG2M3wGueGbM4lRt3G/DOuGTm', 'nEwMsr7pZwsU7pvVLtW29vFe2T4koOtNhXYrFLWidi9DKtjs0Nh5WurnXieM', 4, '2016-11-18 08:06:33', '2016-11-18 08:09:32'),
-(7, 'asd', 'asd@asd.asd', '$2y$10$L4g2kntuM4nUtMYbdCU3QuM.r1imCnyU6Pf5uMbYs8YSJVZJLdEwm', 'zQg9xCjjcA3v8UiH5fiNMTqpKBjZWuWbWNRx1jM2Zp84ZPl4In3kWxF0tYCI', 5, '2016-11-18 08:10:08', '2016-11-18 08:12:20'),
-(8, 'ffffff', 'flwwwopi@yopmail.com', '$2y$10$44sfGmBj6g/hL2odnMK8Gu6KDJnANXvQ0jsphGdYYyNiYE1bj4HhW', 'XOo7DxJfG4o1jpl0WUm0384yKHp0fInjbVUW56ZAja5sq0ttf0SHr5rGNCTQ', 9, '2016-11-18 08:27:23', '2016-11-18 08:29:13'),
-(9, 'valdesofts', 'asd@asd.asdss', '$2y$10$W2SzaWt0ePEkVCkf9KLVCO2Matrx3KvZ9FfCYvn3/YrxeVO6.ieja', 'fdAOIosCuUb9lfvuPvodxU6lVHO6WJEt8MfgSVv2FlMazRssJqoQkFxGXqS6', 10, '2016-11-18 08:29:55', '2016-11-18 08:30:16'),
-(10, 'valdesoftsssss', 'flo2sspi@yopmail.com', '$2y$10$0a2fq5yoGyjJKPaH9bSIT.88wzxS19P8yLBPbc8FKuX5PJXqD/afi', 'Ep1n8SpiHz6G2dF5NVpRDTBB4SiwxGTvYvevvQo75hoLrkdphpGgKlw5AJew', 11, '2016-11-18 08:44:45', '2016-11-18 08:44:54');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `persona`, `estado`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'museoregionalsalesiano@gmail.com', '$2y$10$8CAghMGZQIZaBO6/Ps/14O5UPWRT1vcsxv7EsvIKmVmUq2BIp/vje', 'wMsBubJuRAT96LQ4TuSaPqz16t94Sv6qgeYCzrSG2wLWUmquPLWy0HEPWEcq', 1, 1, '2016-11-22 15:34:31', '2016-11-22 17:56:27');
 
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `clasificaciones`
---
-ALTER TABLE `clasificaciones`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_clasificaciones_users1_idx` (`usuario_carga`),
-  ADD KEY `fk_clasificaciones_fondo1_idx` (`fondo_id`);
-
---
--- Indices de la tabla `donaciones`
---
-ALTER TABLE `donaciones`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_donaciones_donantes1_idx` (`donante`),
-  ADD KEY `fk_donaciones_piezas1_idx` (`pieza`);
-
---
--- Indices de la tabla `donantes`
---
-ALTER TABLE `donantes`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_donantes_personas1_idx` (`persona`);
-
---
--- Indices de la tabla `fondos`
---
-ALTER TABLE `fondos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_fondo_users1_idx` (`usuario_carga`);
-
---
--- Indices de la tabla `fotos`
---
-ALTER TABLE `fotos`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_fotos_piezas1_idx` (`pieza`);
-
---
--- Indices de la tabla `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`),
-  ADD KEY `password_resets_token_index` (`token`);
-
---
--- Indices de la tabla `permissions`
---
-ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `permissions_name_unique` (`name`);
-
---
--- Indices de la tabla `permission_role`
---
-ALTER TABLE `permission_role`
-  ADD PRIMARY KEY (`permission_id`,`role_id`),
-  ADD KEY `permission_role_role_id_foreign` (`role_id`);
-
---
--- Indices de la tabla `personas`
---
-ALTER TABLE `personas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `piezas`
---
-ALTER TABLE `piezas`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_piezas_clasificaciones1_idx` (`clasificacion`);
-
---
--- Indices de la tabla `revisiones`
---
-ALTER TABLE `revisiones`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_revisiones_users1_idx` (`usuario_revision`),
-  ADD KEY `fk_revisiones_piezas1_idx` (`pieza`);
-
---
--- Indices de la tabla `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `roles_name_unique` (`name`);
-
---
--- Indices de la tabla `role_user`
---
-ALTER TABLE `role_user`
-  ADD PRIMARY KEY (`user_id`,`role_id`),
-  ADD KEY `role_user_role_id_foreign` (`role_id`);
-
---
--- Indices de la tabla `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD KEY `fk_users_personas_idx` (`persona`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `clasificaciones`
---
-ALTER TABLE `clasificaciones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `donaciones`
---
-ALTER TABLE `donaciones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `donantes`
---
-ALTER TABLE `donantes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `fondos`
---
-ALTER TABLE `fondos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `fotos`
---
-ALTER TABLE `fotos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT de la tabla `permissions`
---
-ALTER TABLE `permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `personas`
---
-ALTER TABLE `personas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
---
--- AUTO_INCREMENT de la tabla `piezas`
---
-ALTER TABLE `piezas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `revisiones`
---
-ALTER TABLE `revisiones`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Restricciones para tablas volcadas
 --
@@ -519,7 +358,7 @@ ALTER TABLE `permission_role`
 -- Filtros para la tabla `piezas`
 --
 ALTER TABLE `piezas`
-  ADD CONSTRAINT `fk_piezas_clasificaciones1` FOREIGN KEY (`clasificacion`) REFERENCES `clasificaciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `piezas_ibfk_1` FOREIGN KEY (`clasificacion`) REFERENCES `clasificaciones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `revisiones`
