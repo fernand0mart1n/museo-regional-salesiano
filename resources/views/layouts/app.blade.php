@@ -145,9 +145,9 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="/datos">
-                        <i class="fa fa-fw fa-drivers-license-o"></i>
-                        MIS DATOS
+                    <a href="{{ url('/usuarios') }}">
+                        <i class="fa fa-fw fa-user-o"></i>
+                        USUARIOS
                     </a>
                 </li>
             </ul>

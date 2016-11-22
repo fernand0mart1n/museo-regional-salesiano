@@ -8,6 +8,12 @@ use App\Persona;
 
 class PersonaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -15,15 +21,9 @@ class PersonaController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
+        $personas = Persona::all();
 
-            $personas = Persona::all();
-
-            return view("personas.index", compact("personas"));
-
-        } else {
-            return view('auth.login');
-        }
+        return view("personas.index", compact("personas"));
     }
 
     /**
@@ -32,12 +32,8 @@ class PersonaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        if(Auth::check()){    
-            return view('personas.create');
-        } else {
-            return view('auth.login');
-        }
+    { 
+        return view('personas.create');
     }
 
     /**
@@ -48,13 +44,9 @@ class PersonaController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check()){
-            $persona = Request::all();
-            Persona::create($persona);
-            return redirect('personas');
-        } else {
-            return view('auth.login');
-        }
+        $persona = Request::all();
+        Persona::create($persona);
+        return redirect('personas');
     }
 
     /**
@@ -65,12 +57,8 @@ class PersonaController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check()){
-            $persona = Persona::find($id);
-            return view('personas.show',compact('persona'));
-        } else {
-            return view('auth.login');
-        }
+        $persona = Persona::find($id);
+        return view('personas.show',compact('persona'));
     }
 
     /**
@@ -81,12 +69,8 @@ class PersonaController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check()){
-            $persona = Persona::find($id);
-            return view('personas.edit',compact('persona'));
-        } else {
-            return view('auth.login');
-        }
+        $persona = Persona::find($id);
+        return view('personas.edit',compact('persona'));
     }
 
     /**
@@ -98,14 +82,10 @@ class PersonaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check()){
-            $personaUpdate = Request::all();
-            $persona = Persona::find($id);
-            $persona->update($personaUpdate);
-            return redirect('personas');
-        } else {
-            return view('auth.login');
-        }
+        $personaUpdate = Request::all();
+        $persona = Persona::find($id);
+        $persona->update($personaUpdate);
+        return redirect('personas');
     }
 
     /**
@@ -116,11 +96,7 @@ class PersonaController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::check()){
-            Persona::find($id)->delete();
-            return redirect('personas');
-        } else {
-            return view('auth.login');
-        }
+        Persona::find($id)->delete();
+        return redirect('personas');
     }
 }

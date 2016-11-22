@@ -26,23 +26,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
-            $usuario = User::find(Auth::user()->id);
-            $persona = Persona::find($usuario->persona);
-            return view('home', compact('usuario', 'persona'));    
-        } else {
-            return view('auth.login');
-        }
+        $usuario = User::find(Auth::user()->id);
+        $persona = Persona::find($usuario->persona);
+        return view('home', compact('usuario', 'persona'));    
     }
 
     public function datos()
     {
-        if(Auth::check()){
-            $usuario = User::find(Auth::user()->id);
-            $persona = Persona::find($usuario->persona);
-            return view('datos', compact('usuario', 'persona'));    
-        } else {
-            return view('auth.login');
-        }
+        $usuario = User::find(Auth::user()->id);
+        $persona = Persona::find($usuario->persona);
+        return view('datos', compact('usuario', 'persona'));    
     }
 }

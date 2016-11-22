@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+use App\User;
+use App\Persona;
 
 class UserController extends Controller
 {
+    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -13,72 +21,38 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $usuarios = User::all();
+
+        return view("usuarios.index", compact("usuarios"));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $usuario = User::find($id);
+        return view('usuarios.show', compact('usuario'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function rol($id)
     {
-        //
+        $usuario = User::find($id);
+        return view('usuarios.edit', compact('usuario'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function editarRol(Request $request, $id)
     {
-        //
-    }
+        $usuarioestado = $request->input('estado');
+        $usuario = User::find($id);
+        $usuario->estado = $usuarioestado;
+        $usuario->save();
+        
+        return redirect('usuarios');
+    }    
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function estado(Request $request, $id)
     {
-        //
+        $usuarioUpdate = Request::all();
+        $usuario = User::find($id);
+        $usuario->update($usuarioUpdate);
+        return redirect('usuarios');
     }
 }

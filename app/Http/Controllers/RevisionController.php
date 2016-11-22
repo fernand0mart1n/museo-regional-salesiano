@@ -8,6 +8,12 @@ use App\Revision;
 
 class RevisionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -15,15 +21,9 @@ class RevisionController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
+        $revisiones = Revision::all();
 
-            $revisiones = Revision::all();
-
-            return view("revisiones.index", compact("revisiones"));
-
-        } else {
-            return view('auth.login');
-        }
+        return view("revisiones.index", compact("revisiones"));
     }
 
     /**
@@ -32,12 +32,8 @@ class RevisionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        if(Auth::check()){    
-            return view('revisiones.create');
-        } else {
-            return view('auth.login');
-        }
+    { 
+        return view('revisiones.create');
     }
 
     /**
@@ -48,13 +44,9 @@ class RevisionController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check()){
-            $revision = Request::all();
-            Revision::create($revision);
-            return redirect('revisiones');
-        } else {
-            return view('auth.login');
-        }
+        $revision = Request::all();
+        Revision::create($revision);
+        return redirect('revisiones');
     }
 
     /**
@@ -65,12 +57,8 @@ class RevisionController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check()){
-            $revision = Revision::find($id);
-            return view('revisiones.show',compact('clasificacion'));
-        } else {
-            return view('auth.login');
-        }
+        $revision = Revision::find($id);
+        return view('revisiones.show',compact('revision'));
     }
 
     /**
@@ -81,12 +69,8 @@ class RevisionController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check()){
-            $revision = Revision::find($id);
-            return view('revisiones.edit',compact('clasificacion'));
-        } else {
-            return view('auth.login');
-        }
+        $revision = Revision::find($id);
+        return view('revisiones.edit',compact('revision'));
     }
 
     /**
@@ -98,14 +82,10 @@ class RevisionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check()){
-            $revisionUpdate = Request::all();
-            $revision = Revision::find($id);
-            $revision->update($revisionUpdate);
-            return redirect('revisiones');
-        } else {
-            return view('auth.login');
-        }
+        $revisionUpdate = Request::all();
+        $revision = Revision::find($id);
+        $revision->update($revisionUpdate);
+        return redirect('revisiones');
     }
 
     /**
@@ -116,11 +96,7 @@ class RevisionController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::check()){
-            Revision::find($id)->delete();
-            return redirect('revisiones');
-        } else {
-            return view('auth.login');
-        }
+        Revision::find($id)->delete();
+        return redirect('revisiones');
     }
 }

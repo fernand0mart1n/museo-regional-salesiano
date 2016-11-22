@@ -7,6 +7,7 @@ use App\Persona;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
@@ -69,7 +70,7 @@ class RegisterController extends Controller
             'cuil_cuit' => $data['cuil_cuit'],
             'domicilio' => $data['domicilio'],
             'telefono' => $data['telefono'],
-            'fecha_carga' => $data['fecha_carga']
+            'fecha_carga' => Carbon::now()
         ]);
 
         return User::create([

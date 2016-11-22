@@ -8,6 +8,12 @@ use App\Fondo;
 
 class FondoController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -15,15 +21,9 @@ class FondoController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
+        $fondos = Fondo::all();
 
-            $fondos = Fondo::all();
-
-            return view("fondos.index", compact("fondos"));
-
-        } else {
-            return view('auth.login');
-        }
+        return view("fondos.index", compact("fondos"));
     }
 
     /**
@@ -33,11 +33,7 @@ class FondoController extends Controller
      */
     public function create()
     {
-        if(Auth::check()){    
-            return view('fondos.create');
-        } else {
-            return view('auth.login');
-        }
+        return view('fondos.create');
     }
 
     /**
@@ -48,13 +44,9 @@ class FondoController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check()){
-            $fondo = Request::all();
-            Fondo::create($fondo);
-            return redirect('fondos');
-        } else {
-            return view('auth.login');
-        }
+        $fondo = Request::all();
+        Fondo::create($fondo);
+        return redirect('fondos');
     }
 
     /**
@@ -65,12 +57,8 @@ class FondoController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check()){
-            $fondo = Fondo::find($id);
-            return view('fondos.show',compact('fondo'));
-        } else {
-            return view('auth.login');
-        }
+        $fondo = Fondo::find($id);
+        return view('fondos.show',compact('fondo'));
     }
 
     /**
@@ -81,12 +69,8 @@ class FondoController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check()){
-            $fondo = Fondo::find($id);
-            return view('fondos.edit',compact('fondo'));
-        } else {
-            return view('auth.login');
-        }
+        $fondo = Fondo::find($id);
+        return view('fondos.edit',compact('fondo'));
     }
 
     /**
@@ -98,14 +82,10 @@ class FondoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check()){
-            $fondoUpdate = Request::all();
-            $fondo = Fondo::find($id);
-            $fondo->update($fondoUpdate);
-            return redirect('fondos');
-        } else {
-            return view('auth.login');
-        }
+        $fondoUpdate = Request::all();
+        $fondo = Fondo::find($id);
+        $fondo->update($fondoUpdate);
+        return redirect('fondos');
     }
 
     /**
@@ -116,11 +96,7 @@ class FondoController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::check()){
-            Fondo::find($id)->delete();
-            return redirect('fondos');
-        } else {
-            return view('auth.login');
-        }
+        Fondo::find($id)->delete();
+        return redirect('fondos');
     }
 }

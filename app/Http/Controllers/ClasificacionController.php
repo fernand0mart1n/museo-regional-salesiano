@@ -8,6 +8,12 @@ use App\Clasificacion;
 
 class ClasificacionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,15 +21,8 @@ class ClasificacionController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
-
-            $clasificaciones = Clasificacion::all();
-
-            return view("clasificaciones.index", compact("clasificaciones"));
-
-        } else {
-            return view('auth.login');
-        }
+        $clasificaciones = Clasificacion::all();
+        return view("clasificaciones.index", compact("clasificaciones"));
     }
 
     /**
@@ -33,11 +32,7 @@ class ClasificacionController extends Controller
      */
     public function create()
     {
-        if(Auth::check()){    
-            return view('clasificaciones.create');
-        } else {
-            return view('auth.login');
-        }
+        return view('clasificaciones.create');
     }
 
     /**
@@ -48,13 +43,9 @@ class ClasificacionController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check()){
-            $clasificacion = Request::all();
-            Clasificacion::create($clasificacion);
-            return redirect('clasificaciones');
-        } else {
-            return view('auth.login');
-        }
+        $clasificacion = Request::all();
+        Clasificacion::create($clasificacion);
+        return redirect('clasificaciones');
     }
 
     /**
@@ -65,12 +56,8 @@ class ClasificacionController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check()){
-            $clasificacion = Clasificacion::find($id);
-            return view('clasificaciones.show',compact('clasificacion'));
-        } else {
-            return view('auth.login');
-        }
+        $clasificacion = Clasificacion::find($id);
+        return view('clasificaciones.show',compact('clasificacion'));
     }
 
     /**
@@ -81,12 +68,8 @@ class ClasificacionController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check()){
-            $clasificacion = Clasificacion::find($id);
-            return view('clasificaciones.edit',compact('clasificacion'));
-        } else {
-            return view('auth.login');
-        }
+        $clasificacion = Clasificacion::find($id);
+        return view('clasificaciones.edit',compact('clasificacion'));
     }
 
     /**
@@ -98,14 +81,10 @@ class ClasificacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check()){
-            $clasificacionUpdate = Request::all();
-            $clasificacion = Clasificacion::find($id);
-            $clasificacion->update($clasificacionUpdate);
-            return redirect('clasificaciones');
-        } else {
-            return view('auth.login');
-        }
+        $clasificacionUpdate = Request::all();
+        $clasificacion = Clasificacion::find($id);
+        $clasificacion->update($clasificacionUpdate);
+        return redirect('clasificaciones');
     }
 
     /**
@@ -116,11 +95,7 @@ class ClasificacionController extends Controller
      */
     public function destroy($id)
     {
-        if(Auth::check()){
-            Clasificacion::find($id)->delete();
-            return redirect('clasificaciones');
-        } else {
-            return view('auth.login');
-        }
+        Clasificacion::find($id)->delete();
+        return redirect('clasificaciones');
     }
 }

@@ -37,19 +37,29 @@
                     @endif
                 </p>
                 <p> 
-                    <label for="nombre" class="youpasswd" data-icon=""><span>Confirma la contraseña</span></label>
-                    <input id="passwordsignup_confirm" name="password_confirmation" required="required" type="password" placeholder="Confirma la contraseña"/>
+                    <label for="nombre" class="youpasswd" data-icon=""><span>Contraseña</span></label>
+                    <input id="password" name="password" required="required" type="password" placeholder="Contraseña"/>
+                    @if ($errors->has('password'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
                 </p>
 
                 <p> 
                     <label for="passwordsignup_confirm" class="youpasswd" data-icon=""><span>Confirma la contraseña</span></label>
                     <input id="passwordsignup_confirm" name="password_confirmation" required="required" type="password" placeholder="Confirma la contraseña"/>
+                    @if ($errors->has('password_confirmation'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('password_confirmation') }}</strong>
+                        </span>
+                    @endif
                 </p>
 
                 <p> 
                     <!--div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}"-->
                     <label for="passwordsignup" data-icon=""><span>Nombre(s)</span></label>
-                    <input id="nombre" name="nombre" required="required" type="text" placeholder="Nombre(s)"/>
+                    <input id="nombre" name="nombre" required="required" type="text" value="{{ old('nombre') }}" placeholder="Nombre(s)"/>
                     @if ($errors->has('nombre'))
                         <span class="help-block">
                             <strong>{{ $errors->first('nombre') }}</strong>
@@ -58,7 +68,12 @@
                 </p>
                 <p> 
                     <label for="apellido" data-icon=""><span>Apellido(s)</span></label>
-                    <input id="apellido" name="apellido" required="required" type="text" placeholder="Apellido(s)"/>
+                    <input id="apellido" name="apellido" required="required" type="text" value="{{ old('apellido') }}" placeholder="Apellido(s)"/>
+                    @if ($errors->has('apellido'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('apellido') }}</strong>
+                        </span>
+                    @endif
                 </p>
 
                 <label for="sexo">Sexo</label><br>
@@ -70,24 +85,33 @@
 
                 <p> 
                     <label for="cuil_cuit" data-icon=""><span>CUIL/CUIT</span></label>
-                    <input id="cuil_cuit" name="cuil_cuit" required="required" type="text" placeholder="CUIL/CUIT"/>
+                    <input id="cuil_cuit" name="cuil_cuit" value="{{ old('cuil_cuit') }}"  required="required" type="text" placeholder="CUIL/CUIT"/>
+                    @if ($errors->has('cuil_cuit'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('cuil_cuit') }}</strong>
+                        </span>
+                    @endif
                 </p>
 
                 <p> 
                     <label for="domicilio" data-icon=""><span>Domicilio</span></label>
-                    <input id="domicilio" name="domicilio" required="required" type="text" placeholder="Domicilio"/>
+                    <input id="domicilio" name="domicilio" value="{{ old('domicilio') }}" required="required" type="text" placeholder="Domicilio"/>
+                    @if ($errors->has('domicilio'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('domicilio') }}</strong>
+                        </span>
+                    @endif
                 </p>
 
                 <p> 
                     <label for="telefono" data-icon=""><span>Teléfono</span></label>
-                    <input id="telefono" name="telefono" required="required" type="text" placeholder="Teléfono"/>
+                    <input id="telefono" name="telefono" value="{{ old('telefono') }}" required="required" type="text" placeholder="Teléfono"/>
+                    @if ($errors->has('telefono'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('telefono') }}</strong>
+                        </span>
+                    @endif
                 </p>
-
-                <p> 
-                    <label for="fecha_carga" data-icon=""><span>Fecha de carga</span></label>
-                    <input id="fecha_carga" name="fecha_carga" required="required" type="text" placeholder="Fecha de carga"/>
-                </p>
-
                 <p class="signin button"> 
                     <input type="submit" value="Registrar"/> 
                 </p>
@@ -95,6 +119,9 @@
                     <span>¿Ya estás dentro?</span>
                     <a href="/login" class="to_register">Ingresar</a>
                 </p>
+                @foreach( $errors as $error )
+                    {{$error}}
+                @endforeach
             </form>
         </div>
 @endsection

@@ -8,6 +8,12 @@ use App\Pieza;
 
 class PiezaController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -15,15 +21,9 @@ class PiezaController extends Controller
      */
     public function index()
     {
-        if(Auth::check()){
+        $piezas = Pieza::all();
 
-            $piezas = Pieza::all();
-
-            return view("piezas.index", compact("piezas"));
-
-        } else {
-            return view('auth.login');
-        }
+        return view("piezas.index", compact("piezas"));
     }
 
     /**
@@ -33,11 +33,7 @@ class PiezaController extends Controller
      */
     public function create()
     {
-        if(Auth::check()){    
-            return view('piezas.create');
-        } else {
-            return view('auth.login');
-        }
+        return view('piezas.create');
     }
 
     /**
@@ -48,13 +44,9 @@ class PiezaController extends Controller
      */
     public function store(Request $request)
     {
-        if(Auth::check()){
-            $pieza = Request::all();
-            Pieza::create($pieza);
-            return redirect('piezas');
-        } else {
-            return view('auth.login');
-        }
+        $pieza = Request::all();
+        Pieza::create($pieza);
+        return redirect('piezas');
     }
 
     /**
@@ -65,12 +57,8 @@ class PiezaController extends Controller
      */
     public function show($id)
     {
-        if(Auth::check()){
-            $pieza = Pieza::find($id);
-            return view('piezas.show',compact('pieza'));
-        } else {
-            return view('auth.login');
-        }
+        $pieza = Pieza::find($id);
+        return view('piezas.show',compact('pieza'));
     }
 
     /**
@@ -81,12 +69,8 @@ class PiezaController extends Controller
      */
     public function edit($id)
     {
-        if(Auth::check()){
-            $pieza = Pieza::find($id);
-            return view('piezas.edit',compact('pieza'));
-        } else {
-            return view('auth.login');
-        }
+        $pieza = Pieza::find($id);
+        return view('piezas.edit',compact('pieza'));
     }
 
     /**
@@ -98,14 +82,10 @@ class PiezaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if(Auth::check()){
-            $piezaUpdate = Request::all();
-            $pieza = Pieza::find($id);
-            $pieza->update($piezaUpdate);
-            return redirect('piezas');
-        } else {
-            return view('auth.login');
-        }
+        $piezaUpdate = Request::all();
+        $pieza = Pieza::find($id);
+        $pieza->update($piezaUpdate);
+        return redirect('piezas');
     }
 
     /**
@@ -116,11 +96,7 @@ class PiezaController extends Controller
      */
     public function desproy($id)
     {
-        if(Auth::check()){
-            Pieza::find($id)->delete();
-            return redirect('piezas');
-        } else {
-            return view('auth.login');
-        }
+        Pieza::find($id)->delete();
+        return redirect('piezas');
     }
 }
