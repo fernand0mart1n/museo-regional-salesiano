@@ -19,4 +19,8 @@ class Pieza extends Model
     public function revision() {
         return $this->belongsTo('App\Revision');
     }
+
+    public function fotos() {
+        return $this->belongsTo('App\Foto');
+    }
 }
