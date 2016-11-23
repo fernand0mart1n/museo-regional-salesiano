@@ -48,7 +48,7 @@
                     {{ $usuario->person->apellido }}, {{ $usuario->person->nombre }}
                 </td>
                 <td>
-                    {{ Carbon\Carbon::parse($usuario->person->fecha_carga)->diffForHumans() }}
+                    {{ Carbon\Carbon::parse($usuario->created_at)->diffForHumans() }}
                 </td>
                 <td>
                     <?= Former::button()
