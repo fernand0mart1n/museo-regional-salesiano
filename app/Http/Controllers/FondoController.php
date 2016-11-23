@@ -2,12 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use Auth;
 use App\Fondo;
+use Validator;
 
 class FondoController extends Controller
 {
+
+    /*$messsages = array(
+        'email.required'=>'You cant leave Email field empty',
+        'name.required'=>'You cant leave name field empty',
+        'name.min'=>'The field has to be :min chars long',
+    );
+
+    $rules = array(
+        'email'=>'required|unique:content',
+        'name'=>'required|min:3',
+    );
+
+    $validator = Validator::make(Input::all(), $rules,$messsages);
+    */
 
     public function __construct()
     {
@@ -44,9 +59,17 @@ class FondoController extends Controller
      */
     public function store(Request $request)
     {
-        $fondo = Request::all();
+
+        $validator = Validator::make($request->all(), Fondo::rules(), Fondo::messages());
+
+        if($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator);
+        }
+
+        $fondo = $request->all();
         Fondo::create($fondo);
-        return redirect('fondos');
+        return redirect('fondos')->with('success', ' El fondo ha sido cargado exitosamente.');
     }
 
     /**
@@ -82,10 +105,17 @@ class FondoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $fondoUpdate = Request::all();
+        $validator = Validator::make($request->all(), Fondo::rules(), Fondo::messages());
+
+        if($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator);
+        }
+
+        $fondoUpdate = $request->all();
         $fondo = Fondo::find($id);
         $fondo->update($fondoUpdate);
-        return redirect('fondos');
+        return redirect('fondos')->with('success', ' El fondo ha sido modificado exitosamente.');
     }
 
     /**

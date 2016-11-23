@@ -31,21 +31,14 @@
         <?= Former::textarea('descripcion')
         ->label('Descripción')
         ->value($clasificacion->descripcion)
-        ->placeholder('Descripción') ?>
+        ->placeholder('Descripción')
+        ->required() ?>
 
         <?= Former::select('fondo_id')
         ->label('Pertenece al fondo')
         ->value($clasificacion->fondo_id)
-        ->fromQuery(App\Fondo::all(), 'descripcion', 'id') ?>
-
-        <?= Former::text('usuario')
-        ->label('Cargado por')
-        ->placeholder( $clasificacion->user->name )
-        ->readonly() ?>
-
-        <?= Former::date('fecha_carga')
-        ->label('Fecha de carga')
-        ->value(Carbon\Carbon::parse($clasificacion->fecha_carga)->format('d/m/Y')) ?>
+        ->fromQuery(App\Fondo::all(), 'descripcion', 'id')
+        ->required() ?>
 
         <div class="form-group">
 	        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">

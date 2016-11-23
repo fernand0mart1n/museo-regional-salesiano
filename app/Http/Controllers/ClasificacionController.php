@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use Auth;
 use App\Clasificacion;
+use Validator;
 
 class ClasificacionController extends Controller
 {
@@ -43,9 +44,16 @@ class ClasificacionController extends Controller
      */
     public function store(Request $request)
     {
-        $clasificacion = Request::all();
+        $validator = Validator::make($request->all(), Clasificacion::rules(), Clasificacion::messages());
+
+        if($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator);
+        }
+
+        $clasificacion = $request->all();
         Clasificacion::create($clasificacion);
-        return redirect('clasificaciones');
+        return redirect('clasificaciones')->with('success', ' La clasificación ha sido cargada exitosamente.');
     }
 
     /**
@@ -81,10 +89,17 @@ class ClasificacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $clasificacionUpdate = Request::all();
+        $validator = Validator::make($request->all(), Clasificacion::rules(), Clasificacion::messages());
+
+        if($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator);
+        }
+
+        $clasificacionUpdate = $request->all();
         $clasificacion = Clasificacion::find($id);
         $clasificacion->update($clasificacionUpdate);
-        return redirect('clasificaciones');
+        return redirect('clasificaciones')->with('success', ' La clasificación ha sido cargada exitosamente.');
     }
 
     /**

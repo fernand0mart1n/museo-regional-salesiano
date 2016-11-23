@@ -34,7 +34,7 @@
                             </a>
                         </li>
                     @endif
-                @endif
+                @endrole
                 <li class="dropdown">
                     <a href="{{ url('usuarios/autorizar') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         <i class="fa fa-fw fa-user-o"></i> {{ Auth::user()->name }}
@@ -56,6 +56,7 @@
             @endif
         </ul>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+        @if(!Auth::guest())
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
                 <li>
@@ -163,6 +164,7 @@
                 @endrole
             </ul>
         </div>
+        @endif
         <!-- /.navbar-collapse --> </nav>
 
 @endsection

@@ -29,20 +29,13 @@
 
         <?= Former::textarea('descripcion')
         ->label('Descripción')
-        ->placeholder('Descripción') ?>
+        ->placeholder('Descripción')
+        ->required() ?>
 
         <?= Former::hidden('usuario_carga')
         ->label('')
         ->value( Auth::user()->id )
         ->readonly() ?>
-
-        <?= Former::text('usuario')
-        ->label('Cargado por')
-        ->placeholder( Auth::user()->name )
-        ->disabled() ?>
-
-        <?= Former::date('fecha_carga')
-        ->label('Fecha de carga') ?>
 
         <div class="form-group">
 	        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
@@ -56,7 +49,9 @@
             	->class('btn btn-primary pull-right') ?>
             </div>
         </div>
-
+        @foreach($errors as $error)
+            {{$error}}
+            @endforeach
     <?= Former::close() ?>
 	@endsection
 @endsection

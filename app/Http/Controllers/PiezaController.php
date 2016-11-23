@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use Auth;
 use App\Pieza;
+use Validator;
 
 class PiezaController extends Controller
 {
@@ -44,9 +45,16 @@ class PiezaController extends Controller
      */
     public function store(Request $request)
     {
-        $pieza = Request::all();
+        $validator = Validator::make($request->all(), Pieza::rules(), Pieza::messages());
+
+        if($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator);
+        }
+
+        $pieza = $request->all();
         Pieza::create($pieza);
-        return redirect('piezas');
+        return redirect('piezas')->with('success', ' La pieza ha sido cargada exitosamente.');
     }
 
     /**
@@ -82,10 +90,17 @@ class PiezaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $piezaUpdate = Request::all();
+        $validator = Validator::make($request->all(), Pieza::rules(), Pieza::messages());
+
+        if($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator);
+        }
+
+        $piezaUpdate = $request->all();
         $pieza = Pieza::find($id);
         $pieza->update($piezaUpdate);
-        return redirect('piezas');
+        return redirect('piezas')->with('success', ' La pieza ha sido cargada exitosamente.');
     }
 
     /**
@@ -94,7 +109,7 @@ class PiezaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function desproy($id)
+    public function destroy($id)
     {
         Pieza::find($id)->delete();
         return redirect('piezas');

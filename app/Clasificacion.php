@@ -11,7 +11,23 @@ class Clasificacion extends Model
     ];
 
     public $timestamps = false;
+
     protected $table = 'clasificaciones';
+
+    public static function messages(){
+        return [
+            'descripcion.required'=>'La descripción no puede quedar vacía.',
+            'descripcion.max'=>'La descripción no debe exceder los 200 caracteres.',
+            'fondo_id.required' => 'La clasificación debe pertenecer a un fondo.'
+        ];
+    }
+
+    public static function rules(){
+        return [
+            'descripcion' => 'required|max:200',
+            'fondo_id'=>'required'
+        ];
+    }
 
     public function user() {
         return $this->hasOne('App\User','id','usuario_carga');

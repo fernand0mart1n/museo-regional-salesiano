@@ -74,5 +74,8 @@
 			@endforeach
 		</tbody>
 	</table>
+	@if(session('success'))
+		@include('layouts.flash')
+	@endif
 	@endsection
 @endsection

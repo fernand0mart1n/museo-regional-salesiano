@@ -38,7 +38,7 @@
 					Autor
 				</th>
 				<th>
-					Fecha de ejecución
+					Ejecución
 				</th>
 				<th>
 					Tema
@@ -77,8 +77,8 @@
 				</td>
 				<td>
 					<div class="btn-group">
-						<a href="{{ route('piezas.show', $pieza->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
-                        <a href="{{ route('piezas.edit', $pieza->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+						<a href="{{ route('piezas.show', $pieza->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{{ route('piezas.edit', $pieza->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
                     	@role(('admin'))
 	                        <?= Former::open()
 	                        ->class('btn-group')
@@ -89,7 +89,7 @@
 
 	                        <?= Former::button()
 	                        ->type('submit')
-	                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
+	                        ->value('<i class="glyphicon glyphicon-trash"></i>')
 	                        ->class('btn btn-danger') ?>
 	                    @endrole
 					</div>
@@ -98,5 +98,10 @@
 			@endforeach
 		</tbody>
 	</table>
+
+	@if(session('success'))
+		@include('layouts.flash')
+	@endif
+
 	@endsection
 @endsection

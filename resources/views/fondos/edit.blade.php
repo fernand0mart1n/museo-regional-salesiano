@@ -16,11 +16,11 @@
 	<ol class="breadcrumb">
         <li><a href="{{ url('/') }}">Inicio</a></li>
         <li><a href="{{ route('fondos.index') }}">Fondos</a></li>
-        <li class="active">Fondo {{ $fondo->id }}</li>
+        <li class="active">Fondo {{ $fondo->descripcion }}</li>
     </ol>
     <div class="page-header text-center">
         <h3>
-            Editar fondo {{ $fondo->id }}<small>.</small>
+            Editar fondo {{ $fondo->descripcion }}<small>.</small>
         </h3>
     </div>
 
@@ -31,16 +31,8 @@
         <?= Former::textarea('descripcion')
         ->label('Descripción')
         ->value($fondo->descripcion)
-        ->placeholder('Descripción') ?>
-
-        <?= Former::text('usuario')
-        ->label('Cargado por')
-        ->placeholder( $fondo->user->name )
-        ->readonly() ?>
-
-        <?= Former::date('fecha_carga')
-        ->label('Fecha de carga')
-        ->value( Carbon\Carbon::parse($fondo->fecha_carga)->format('d/m/Y') ) ?>
+        ->placeholder('Descripción')
+        ->required() ?>
 
         <div class="form-group">
 	        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">

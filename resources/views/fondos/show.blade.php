@@ -16,11 +16,11 @@
 	<ol class="breadcrumb">
         <li><a href="{{ url('/') }}">Inicio</a></li>
         <li><a href="{{ route('fondos.index') }}">Fondos</a></li>
-        <li class="active">Fondo {{ $fondo->id }}</li>
+        <li class="active">Fondo {{ $fondo->descripcion }}</li>
     </ol>
     <div class="page-header text-center">
         <h3>
-            Fondo {{ $fondo->id }}<small>.</small>
+            Fondo {{ $fondo->descripcion }}<small>.</small>
         </h3>
     </div>
     <?= Former::open()
@@ -37,7 +37,7 @@
         ->placeholder( $fondo->user->name )
         ->readonly() ?>
 
-        <?= Former::date('fecha_carga')
+        <?= Former::text('fecha_carga')
         ->label('Fecha de carga')
         ->placeholder(Carbon\Carbon::parse($fondo->fecha_carga)->format('d/m/Y'))
         ->readonly() ?>
