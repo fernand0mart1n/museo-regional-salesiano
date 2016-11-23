@@ -16,9 +16,10 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/datos', 'HomeController@datos');
 Route::get('/usuarios', 'UserController@index');
-Route::get('/usuarios/{id}', 'UserController@show');
+Route::get('/usuarios/{id}', 'UserController@show', function ($id) {})->where('id', '[0-9]+');
 Route::get('/usuarios/{id}/rol', 'UserController@rol');
 Route::patch('/usuarios/estado/{id}', 'UserController@estado');
+Route::get('/usuarios/autorizar', 'UserController@autorizar');
 
 Route::resource('fondos','FondoController');
 Route::resource('clasificaciones','ClasificacionController');

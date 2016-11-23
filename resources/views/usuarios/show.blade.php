@@ -65,24 +65,9 @@
 
         <div class="form-group">
             <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
-                <a href="{{ url('usuarios') }}" class="btn btn-default">
+                <a href="{{ url('usuarios') }}" class="btn btn-default pull-right">
                     <i class="glyphicon glyphicon-chevron-left"></i> Volver
                 </a>
-                </a>
-                <div class="btn-group pull-right">
-                    <a href="{{ url('usuarios/rol', $usuario->id) }}" class="btn btn-inverse"> 
-                        <i class="glyphicon glyphicon-edit"></i> Cambiar rol
-                    </a>
-                    @if(false)
-                        <a href="{{ url('usuarios/rol', $usuario->id) }}" class="btn btn-primary"> 
-                            Activar <i class="glyphicon glyphicon-check"></i>
-                        </a>
-                    @else
-                        <a href="{{ url('usuarios/rol', $usuario->id) }}" class="btn btn-danger"> 
-                            Desactivar <i class="glyphicon glyphicon-remove"></i>
-                        </a>
-                    @endif
-                </div>
             </div>
         </div>
 

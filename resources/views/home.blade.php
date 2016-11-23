@@ -16,13 +16,13 @@
             <div class="panel-heading">Mensaje de bienvenida</div>
 
             <div class="panel-body">
-                @if($persona->sexo == 'Masculino')
+                @if(Auth::user()->person->sexo == 'Masculino')
                     Bienvenido 
                 @else
                     Bienvenida
                 @endif
                 
-                {{ $persona->nombre }}
+                {{ Auth::user()->person->nombre }}
             </div>
         </div>
     @endsection

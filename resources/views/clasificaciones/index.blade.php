@@ -61,18 +61,19 @@
 					<div class="btn-group">
 						<a href="{{ route('clasificaciones.show', $clasificacion->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
                         <a href="{{ route('clasificaciones.edit', $clasificacion->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                        @role(('admin'))
+	                        <?= Former::open()
+	                        ->class('btn-group')
+	                        ->method('delete')
+	                        ->route('clasificaciones.destroy', $clasificacion->id) ?>
 
-                        <?= Former::open()
-                        ->class('btn-group')
-                        ->method('delete')
-                        ->route('clasificaciones.destroy', $clasificacion->id) ?>
+	                        {{ csrf_field() }}
 
-                        {{ csrf_field() }}
-
-                        <?= Former::button()
-                        ->type('submit')
-                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
-                        ->class('btn btn-danger') ?>
+	                        <?= Former::button()
+	                        ->type('submit')
+	                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
+	                        ->class('btn btn-danger') ?>
+	                    @endrole
 					</div>
 				</td>
 			</tr>

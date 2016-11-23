@@ -32,6 +32,9 @@
 					Estado
 				</th>
 				<th>
+					Rol
+				</th>
+				<th>
 					Fecha de carga
 				</th>
 				<th>
@@ -56,33 +59,30 @@
 					@endif
 				</td>
 				<td>
+					@foreach($usuario->roles as $role)
+        				{{ $role->display_name }}
+    				@endforeach
+				</td>
+				<td>
 					{{ Carbon\Carbon::parse($usuario->person->fecha_carga)->format('d/m/Y') }}
 				</td>
 				<td>
 					<div class="btn-group">
 						<a href="{{ url('usuarios', $usuario->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver datos</a>
                         <a href="{{ url('usuarios/rol', $usuario->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Cambiar rol</a>
-                        <?= Former::open()
-                        ->class('btn-group')
-                        ->method('patch')
-                        ->action('usuarios/estado/'. $usuario->id) ?>
+                        <?= Former::open() 
+                        ->class('btn-group') ?>
                         
                         	{{ csrf_field() }}
 
 	                        @if($usuario->estado)
-	                        	<?= Former::hidden('estado')
-	                        	->value('0') ?>
-
 		                        <?= Former::button()
-		                        ->type('submit')
+		                        ->onclick("activar($usuario->id, 0)")
 		                        ->value('<i class="glyphicon glyphicon-remove"></i> Desactivar')
 		                        ->class('btn btn-danger') ?>
 	                        @else
-	                        	<?= Former::hidden('estado')
-	                        	->value('1') ?>
-
 		                        <?= Former::button()
-		                        ->type('submit')
+		                        ->onclick("activar($usuario->id, 1)")
 		                        ->value('<i class="glyphicon glyphicon-check"></i> Activar')
 		                        ->class('btn btn-primary') ?>
 	                    	@endif
@@ -91,7 +91,13 @@
 				</td>
 			</tr>
 			@endforeach
+
+			@include('layouts.flash')
+			
 		</tbody>
 	</table>
+
+	@include('layouts.activar')
+
 	@endsection
 @endsection

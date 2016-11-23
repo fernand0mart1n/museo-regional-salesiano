@@ -19,31 +19,38 @@
         <!-- Top Menu Items -->
         <ul class="nav navbar-right top-nav">
             @if (Auth::guest())
-            <li>
-                <a href="{{ url('/login') }}">Ingresar</a>
-            </li>
-            <li>
-                <a href="{{ url('/login') }}">Registrarse</a>
-            </li>
+                <li>
+                    <a href="{{ url('/login') }}">Ingresar</a>
+                </li>
+                <li>
+                    <a href="{{ url('/login') }}">Registrarse</a>
+                </li>
             @else
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    <i class="fa fa-fw fa-user-o"></i> {{ Auth::user()->name }}
-                    <span class="caret"></span>
-                </a>
-
-                <ul class="dropdown-menu" role="menu">
-                    <li>
-                        <a href="{{ url('/datos') }}"><i class="fa fa-fw fa-vcard"></i> Editar mis datos</a>
-                        <a href="{{ url('/logout') }}"
-                                    onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
-                                             <i class="fa fa-fw fa-sign-out"></i> Cerrar sesión</a>
-
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                @if(App\User::cantidadUsuarios())
+                    <li class="usuarios-nuevos">
+                        <a href="{{ url('usuarios/autorizar') }}">
+                            <span class="badge">{{ App\User::cantidadUsuarios() }}</span> Usuarios a autorizar
+                        </a>
                     </li>
-                </ul>
-            </li>
+                @endif
+                <li class="dropdown">
+                    <a href="{{ url('usuarios/autorizar') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <i class="fa fa-fw fa-user-o"></i> {{ Auth::user()->name }}
+                        <span class="caret"></span>
+                    </a>
+
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a href="{{ url('/datos') }}"><i class="fa fa-fw fa-vcard"></i> Editar mis datos</a>
+                            <a href="{{ url('/logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                                 <i class="fa fa-fw fa-sign-out"></i> Cerrar sesión</a>
+
+                            <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                        </li>
+                    </ul>
+                </li>
             @endif
         </ul>
         <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
@@ -144,12 +151,14 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="{{ url('/usuarios') }}">
-                        <i class="fa fa-fw fa-user-o"></i>
-                        USUARIOS
-                    </a>
-                </li>
+                @role(('admin'))
+                    <li>
+                        <a href="{{ url('/usuarios') }}">
+                            <i class="fa fa-fw fa-user-o"></i>
+                            USUARIOS
+                        </a>
+                    </li>
+                @endrole
             </ul>
         </div>
         <!-- /.navbar-collapse --> </nav>

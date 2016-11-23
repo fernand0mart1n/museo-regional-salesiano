@@ -33,7 +33,7 @@
         ->placeholder('Descripción')
         ->required() ?>
 
-        <?= Former::select('clasif')
+        <?= Former::select('clasificacion')
         ->label('Clasificación')
         ->required()
         ->fromQuery(App\Clasificacion::all(), 'descripcion', 'id') ?>

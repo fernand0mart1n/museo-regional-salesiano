@@ -153,3 +153,11 @@
 .td-icon {
     text-align: center;
 }
+
+.usuarios-nuevos {
+    background-color: #16a085;
+}
+
+.badge {
+    background-color: red;
+}

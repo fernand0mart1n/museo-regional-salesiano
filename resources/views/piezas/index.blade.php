@@ -79,18 +79,19 @@
 					<div class="btn-group">
 						<a href="{{ route('piezas.show', $pieza->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
                         <a href="{{ route('piezas.edit', $pieza->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                    	@role(('admin'))
+	                        <?= Former::open()
+	                        ->class('btn-group')
+	                        ->method('delete')
+	                        ->route('piezas.destroy', $pieza->id) ?>
 
-                        <?= Former::open()
-                        ->class('btn-group')
-                        ->method('delete')
-                        ->route('piezas.destroy', $pieza->id) ?>
+	                        {{ csrf_field() }}
 
-                        {{ csrf_field() }}
-
-                        <?= Former::button()
-                        ->type('submit')
-                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
-                        ->class('btn btn-danger') ?>
+	                        <?= Former::button()
+	                        ->type('submit')
+	                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
+	                        ->class('btn btn-danger') ?>
+	                    @endrole
 					</div>
 				</td>
 			</tr>

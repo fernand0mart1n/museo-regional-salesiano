@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'persona', 'estado'
+        'name', 'email', 'password', 'persona', 'estado', 'autorizado'
     ];
 
     /**
@@ -41,5 +41,10 @@ class User extends Authenticatable
 
     public function person() {
         return $this->hasOne('App\Persona','id','persona');
+    }
+
+    public static function cantidadUsuarios()
+    {
+        return User::where('autorizado', '0')->count();
     }
 }

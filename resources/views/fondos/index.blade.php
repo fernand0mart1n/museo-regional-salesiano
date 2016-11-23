@@ -55,18 +55,19 @@
 					<div class="btn-group">
 						<a href="{{ route('fondos.show', $fondo->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
                         <a href="{{ route('fondos.edit', $fondo->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
+                        @role(('admin'))
+	                        <?= Former::open()
+	                        ->class('btn-group')
+	                        ->method('delete')
+	                        ->route('fondos.destroy', $fondo->id) ?>
 
-                        <?= Former::open()
-                        ->class('btn-group')
-                        ->method('delete')
-                        ->route('fondos.destroy', $fondo->id) ?>
+	                        {{ csrf_field() }}
 
-                        {{ csrf_field() }}
-
-                        <?= Former::button()
-                        ->type('submit')
-                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
-                        ->class('btn btn-danger') ?>
+	                        <?= Former::button()
+	                        ->type('submit')
+	                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
+	                        ->class('btn btn-danger') ?>
+	                    @endrole
 					</div>
 				</td>
 			</tr>
