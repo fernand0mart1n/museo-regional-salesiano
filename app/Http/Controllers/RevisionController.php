@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Request;
+use Illuminate\Http\Request;
 use Auth;
 use App\Revision;
+use Validator;
 
 class RevisionController extends Controller
 {
@@ -44,9 +45,16 @@ class RevisionController extends Controller
      */
     public function store(Request $request)
     {
-        $revision = Request::all();
+        $validator = Validator::make($request->all(), Revision::rules(), Revision::messages());
+
+        if($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator);
+        }
+
+        $revision = $request->all();
         Revision::create($revision);
-        return redirect('revisiones');
+        return redirect('revisiones')->with('success', ' La revisión ha sido cargada exitosamente.');
     }
 
     /**
@@ -82,10 +90,17 @@ class RevisionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $revisionUpdate = Request::all();
+        $validator = Validator::make($request->all(), Revision::rules(), Revision::messages());
+
+        if($validator->fails()) {
+            return redirect()->back()
+            ->withErrors($validator);
+        }
+
+        $revisionUpdate = $request->all();
         $revision = Revision::find($id);
         $revision->update($revisionUpdate);
-        return redirect('revisiones');
+        return redirect('revisiones')->with('success', ' La revisión ha sido actualizada exitosamente.');
     }
 
     /**

@@ -79,6 +79,8 @@
 					<div class="btn-group">
 						<a href="{{ route('piezas.show', $pieza->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i></a>
                         <a href="{{ route('piezas.edit', $pieza->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="{{ url('piezas/fotos', $pieza->id) }}" class="btn btn-inverse" title="Subir fotos"><i class="fa fa-upload"></i></a>
+                        <a href="{{ url('piezas/ver', $pieza->id) }}" class="btn btn-inverse" title="Ver fotos"><i class="glyphicon glyphicon-picture"></i></a>
                     	@role(('admin'))
 	                        <?= Former::open()
 	                        ->class('btn-group')

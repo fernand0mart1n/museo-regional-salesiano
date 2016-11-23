@@ -46,6 +46,6 @@ class Pieza extends Model
     }
 
     public function fotos() {
-        return $this->belongsTo('App\Foto');
+        return $this->belongsToMany('App\Foto');
     }
 }

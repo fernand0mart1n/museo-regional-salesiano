@@ -20,6 +20,21 @@ Route::get('/usuarios/{id}', 'UserController@show', function ($id) {})->where('i
 Route::patch('/usuarios/estado/{id}', 'UserController@estado');
 Route::get('/usuarios/rol/{id}', 'UserController@rol');
 Route::get('/usuarios/autorizar', 'UserController@autorizar');
+Route::get('/piezas/fotos/{id}', 'PiezaController@cargarFotos');
+Route::post('/piezas/fotos/{id}', 'PiezaController@subirFotos');
+Route::get('/piezas/ver/{id}', 'PiezaController@verFotos');
+
+Route::get('storage/{archivo}', function ($archivo) {
+     $public_path = public_path();
+     $url = $public_path.'/storage/'.$archivo;
+     //verificamos si el archivo existe y lo retornamos
+     if (Storage::exists($archivo))
+     {
+       return response()->download($url);
+     }
+     //si no se encuentra lanzamos un error 404.
+     abort(404);
+});
 
 Route::resource('fondos','FondoController');
 Route::resource('clasificaciones','ClasificacionController');

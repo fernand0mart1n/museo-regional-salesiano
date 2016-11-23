@@ -11,7 +11,22 @@ class Revision extends Model
     ];
 
     public $timestamps = false;
+
     protected $table = 'revisiones';
+
+    public static function messages(){
+        return [
+            'usuario_revision.required'=>'Debe tener un usuario de carga.',
+            'pieza.required'=>'La debe tener una pieza.'
+        ];
+    }
+
+    public static function rules(){
+        return [
+            'usuario_revision' => 'required',
+            'pieza' => 'required',
+        ];
+    }
 
     public function user() {
         return $this->hasOne('App\User','id','usuario_revision');

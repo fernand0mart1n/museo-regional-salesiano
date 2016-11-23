@@ -15,7 +15,7 @@
 	@section('content')
 	<ol class="breadcrumb">
         <li><a href="{{ url('/') }}">Inicio</a></li>
-        <li class="active">Revisiones</a></li>
+        <li class="active">Revisiones</li>
     </ol>
 	<h3>Revisiones</h3>
 	<a href="{{url('/revisiones/create')}}" class="btn btn-primary">
@@ -87,5 +87,10 @@
 			@endforeach
 		</tbody>
 	</table>
+	
+	@if(session('success'))
+		@include('layouts.flash')
+	@endif
+	
 	@endsection
 @endsection

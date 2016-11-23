@@ -33,13 +33,9 @@
         ->value( Auth::user()->id )
         ->readonly() ?>
 
-        <?= Former::text('usuario')
-        ->label('Cargado por')
-        ->placeholder( Auth::user()->name )
-        ->disabled() ?>
-
         <?= Former::select('pieza')
-        ->fromQuery(App\Pieza::all(), 'descripcion', 'id') ?>
+        ->fromQuery(App\Pieza::all(), 'descripcion', 'id')
+        ->required() ?>
 
         <?= Former::date('fecha_revision')
         ->label('Fecha de carga') ?>

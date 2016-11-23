@@ -67,13 +67,11 @@
 	        	<a href="{{ route('piezas.index') }}" class="btn btn-default">
 	        		<i class="glyphicon glyphicon-chevron-left"></i> Volver
 	        	</a>
-                </a>
                 <a href="{{ route('piezas.edit', $pieza->id) }}" class="btn btn-primary pull-right"> 
                 	Editar <i class="glyphicon glyphicon-edit"></i>
                 </a>
             </div>
         </div>
-
     <?= Former::close() ?>
 	@endsection
 @endsection

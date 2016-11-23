@@ -28,14 +28,10 @@
 	->method('patch')
 	->route('revisiones.update', $revision->id) ?>
 
-        <?= Former::text('usuario')
-        ->label('Cargado por')
-        ->placeholder( Auth::user()->name )
-        ->readonly() ?>
-
         <?= Former::select('pieza')
         ->fromQuery(App\Pieza::all(), 'descripcion', 'id')
-        ->value($revision->piez->descripcion) ?>
+        ->value($revision->piez->descripcion)
+        ->required() ?>
 
         <?= Former::date('fecha_revision')
         ->value($revision->fecha_revision)
