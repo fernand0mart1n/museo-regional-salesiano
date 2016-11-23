@@ -35,7 +35,7 @@
 					Rol
 				</th>
 				<th>
-					Fecha de carga
+					Usuario desde
 				</th>
 				<th>
 					Acciones
@@ -43,6 +43,7 @@
 			</tr>
 		</thead>
 		<tbody>
+			{{ Carbon\Carbon::setLocale('es') }}
 			@foreach($usuarios as $usuario)
 			<tr>
 				<td>
@@ -64,7 +65,7 @@
     				@endforeach
 				</td>
 				<td>
-					{{ Carbon\Carbon::parse($usuario->person->fecha_carga)->format('d/m/Y') }}
+					{{ Carbon\Carbon::parse($usuario->person->fecha_carga)->diffForHumans() }}
 				</td>
 				<td>
 					<div class="btn-group">
@@ -92,12 +93,25 @@
 			</tr>
 			@endforeach
 
-			@include('layouts.flash')
+			@if(Session::has('success'))
+				@include('layouts.flash')
+			@endif
 			
 		</tbody>
 	</table>
 
-	@include('layouts.activar')
+	@extends('layouts.modal')
+
+	@section('modalid', 'myModal')
+
+	@section('modaltitle', 'Cambiar el estado del usuario')
+
+	@section('modalbody', '¿Está seguro que desea cambiar el estado del usuario?')
+
+	@section('modalfooter')
+		<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button id="btnDel" type="button" class="btn btn-primary">Cambiar estado</button>
+	@endsection
 
 	@endsection
 @endsection

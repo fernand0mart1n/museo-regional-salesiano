@@ -44,7 +44,7 @@
         <?= Former::text('autor')
         ->placeholder('Autor') ?>
 
-        <?= Former::date('fecha_ejecucion')
+        <?= Former::text('fecha_ejecucion')
         ->label('Fecha de ejecución') ?>
 
         <?= Former::text('tema')

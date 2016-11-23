@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('titulo', ' - Revisión: ' . $revision->pieza->descripcion)
+@section('titulo', ' - Revisión: ' . $revision->piez->descripcion)
 
 @section('head')
 
@@ -33,7 +33,7 @@
         ->readonly() ?>
 
         <?= Former::textarea('pieza')
-        ->placeholder($revision->pieza->descripcion)
+        ->placeholder($revision->piez->descripcion)
         ->readonly ?>
 
         <?= Former::date('fecha_revision')

@@ -30,7 +30,7 @@
                     Apellido(s) y nombre(s)
                 </th>
                 <th>
-                    Fecha de carga
+                    Solicitó unirse
                 </th>
                 <th>
                     Acciones
@@ -38,6 +38,7 @@
             </tr>
         </thead>
         <tbody>
+            {{ Carbon\Carbon::setLocale('es') }}
             @foreach($sinAutorizar as $usuario)
             <tr>
                 <td>
@@ -47,7 +48,7 @@
                     {{ $usuario->person->apellido }}, {{ $usuario->person->nombre }}
                 </td>
                 <td>
-                    {{ Carbon\Carbon::parse($usuario->person->fecha_carga)->format('d/m/Y') }}
+                    {{ Carbon\Carbon::parse($usuario->person->fecha_carga)->diffForHumans() }}
                 </td>
                 <td>
                     <?= Former::button()
@@ -60,7 +61,26 @@
         </tbody>
     </table>
 
-    @include('layouts.autorizar')
+    @extends('layouts.modal')
+
+    @section('modalid', 'myModal')
+
+    @section('modaltitle', 'Autorizar al usuario ' . $usuario->name)
+
+    @section('modalbody')
+
+        <p>¿Está seguro que desea autorizar al usuario {{ $usuario->name }}? <br>
+        Se activará al usuario con el rol seleccionado.</p><br>
+
+        <?= Former::select('rol')
+        ->fromQuery(App\Role::all(), 'display_name', 'id')
+        ->required() ?>
+    @endsection
+
+    @section('modalfooter')
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button id="btnDel" type="button" class="btn btn-primary">Autorizar usuario</button>
+    @endsection
 
     @endsection
 @endsection

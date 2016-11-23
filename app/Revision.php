@@ -17,7 +17,7 @@ class Revision extends Model
         return $this->hasOne('App\User','id','usuario_revision');
     }
 
-    public function pieza() {
-        return $this->belongsTo('App\Pieza','id','pieza');
+    public function piez() {
+        return $this->hasOne('App\Pieza','id','pieza');
     }
 }

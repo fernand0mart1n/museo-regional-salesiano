@@ -16,7 +16,7 @@ function autorizar(usuario_id){
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "POST",
-            url: "estado/" + usuario_id,
+            url: "/usuarios/estado/" + usuario_id,
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             data: { _method: 'patch', rol: rol, estado: '1', autorizado: '1' },
             success: function(){

@@ -26,12 +26,14 @@
                     <a href="{{ url('/login') }}">Registrarse</a>
                 </li>
             @else
-                @if(App\User::cantidadUsuarios())
-                    <li class="usuarios-nuevos">
-                        <a href="{{ url('usuarios/autorizar') }}">
-                            <span class="badge">{{ App\User::cantidadUsuarios() }}</span> Usuarios a autorizar
-                        </a>
-                    </li>
+                @role(('admin'))
+                    @if(App\User::cantidadUsuarios())
+                        <li class="usuarios-nuevos">
+                            <a href="{{ url('usuarios/autorizar') }}">
+                                <span class="badge">{{ App\User::cantidadUsuarios() }}</span> Usuarios a autorizar
+                            </a>
+                        </li>
+                    @endif
                 @endif
                 <li class="dropdown">
                     <a href="{{ url('usuarios/autorizar') }}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">

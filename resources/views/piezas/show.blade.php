@@ -47,7 +47,7 @@
         ->placeholder($pieza->autor)
         ->readonly() ?>
 
-        <?= Former::date('fecha_ejecucion')
+        <?= Former::text('fecha_ejecucion')
         ->placeholder($pieza->fecha_ejecucion)
         ->label('Fecha de ejecución')
         ->readonly() ?>

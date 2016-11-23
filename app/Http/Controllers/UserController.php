@@ -13,7 +13,7 @@ class UserController extends Controller
     
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('role:admin');
     }
     
     /**
@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $usuarios = User::all();
+        $usuarios = User::where('autorizado', '1')->get();
 
         return view("usuarios.index", compact("usuarios"));
     }
@@ -46,8 +46,8 @@ class UserController extends Controller
         $usuario = User::find($id);
         $usuario->update($usuarioUpdate);
 
-        //$usuarios[0]->attachRole(Role::find(1));
         if(Request::input('rol')){
+            $usuario->detachRoles($usuario->roles);
             $usuario->attachRole(Request::input('rol'));
         }
 

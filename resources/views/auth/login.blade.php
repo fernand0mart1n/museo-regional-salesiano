@@ -3,6 +3,31 @@
 @section('head')
 
 <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/notify.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/prettify.css') }}">
+<script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ asset('js/notify.js') }}"></script>
+<script src="{{ asset('js/prettify.js') }}"></script>
+
+@if(count('errors'))
+    @foreach($errors->all() as $error)
+    <script type="text/javascript">
+    $(document).ready( function(){
+        $.notify("{{ $error }}", {
+            type:"danger", 
+            align:"left", 
+            verticalAlign:"bottom", 
+            animationType:"scale",
+            color: "#fff", 
+            delay:0,
+            background: "#D44950",
+            icon:"bell",
+            close: true
+        });
+    });
+    </script>
+    @endforeach
+@endif
 
 @endsection
 

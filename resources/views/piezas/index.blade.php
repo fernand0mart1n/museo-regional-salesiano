@@ -67,7 +67,7 @@
 					{{ $pieza->autor }}
 				</td>
 				<td>
-					{{ Carbon\Carbon::parse($pieza->fecha_ejecucion)->format('d/m/Y') }}
+					{{ $pieza->fecha_ejecucion }}
 				</td>
 				<td>
 					{{ $pieza->tema }}

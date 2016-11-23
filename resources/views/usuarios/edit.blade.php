@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('titulo', ' - Editando a ' . $persona->nombre . ' ' . $persona->apellido)
+@section('titulo', ' - ' . $usuario->name)
 
 @section('head')
 
@@ -15,58 +15,49 @@
 	@section('content')
 	<ol class="breadcrumb">
         <li><a href="{{ url('/') }}">Inicio</a></li>
-        <li><a href="{{ route('personas.index') }}">Personas</a></li>
-        <li class="active">{{ $persona->nombre }} {{ $persona->apellido }}</li>
+        <li><a href="{{ route('personas.index') }}">Gestión de usuarios</a></li>
+        <li class="active">{{ $usuario->name }}</li>
     </ol>
     <div class="page-header text-center">
-        <h3>
-            Editando a {{ $persona->nombre }} {{ $persona->apellido }}<small>.</small>
-        </h3>
+        <h4>
+            Usuario: {{ $usuario->name }} ({{ $usuario->person->nombre }} {{ $usuario->person->apellido }})<small>.</small>
+        </h4>
     </div>
+    <?= Former::open() ?>
 
-    <?= Former::open()
-	->method('patch')
-	->route('personas.update', $persona->id) ?>
-
-        <?= Former::text('nombre')
-        ->value($persona->nombre)
-        ->placeholder('Nombre') ?>
-
-        <?= Former::text('apellido')
-        ->value($persona->apellido)
-        ->placeholder('Apellido') ?>
-
-        <?= Former::text('cuil_cuit')
-        ->label('CUIL/CUIT')
-        ->value($persona->cuil_cuit)
-        ->placeholder('CUIL/CUIT') ?>
-
-        <?= Former::text('domicilio')
-        ->value($persona->domicilio)
-        ->placeholder('Domicilio') ?>
-
-        <?= Former::text('telefono')
-        ->value($persona->telefono)
-        ->label('Teléfono')
-        ->placeholder('Teléfono') ?>
-
-        <?= Former::date('fecha_carga')
-        ->value(Carbon\Carbon::parse($persona->fecha_carga)->format('d/m/Y'))
-        ->label('Fecha de carga') ?>
+    	<?= Former::select('rol')
+	    ->fromQuery(App\Role::all(), 'display_name', 'id')
+	    ->required() ?>
 
         <div class="form-group">
-	        <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
-	        	<a href="{{ route('personas.index') }}" class="btn btn-default">
-	        		<i class="glyphicon glyphicon-chevron-left"></i> Volver
-	        	</a>
-
-	        	<?= Former::button()
-            	->type('submit')
-            	->value('Actualizar <i class="glyphicon glyphicon-floppy-save"></i>')
-            	->class('btn btn-primary pull-right') ?>
+            <div class="col-lg-offset-2 col-sm-offset-4 col-lg-10 col-sm-8">
+                <a href="{{ url('usuarios') }}" class="btn btn-default">
+                    <i class="glyphicon glyphicon-chevron-left"></i> Volver
+                </a>
+                <?= Former::button()
+	            ->onclick("autorizar($usuario->id)")
+	            ->value('<i class="glyphicon glyphicon-check"></i> Agregar rol y autorizar')
+	            ->class('btn btn-primary pull-right') ?>
             </div>
         </div>
 
     <?= Former::close() ?>
+
+    @extends('layouts.modal')
+
+	@section('modalid', 'myModal')
+
+	@section('modaltitle', 'Cambiar el rol del usuario ' . $usuario->name)
+
+	@section('modalbody')
+		<p>¿Está seguro que desea cambiar el rol del usuario {{ $usuario->name }}?</p>
+	    <br>
+	@endsection
+
+	@section('modalfooter')
+		<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	    <button id="btnDel" type="button" class="btn btn-primary">Cambiar rol</button>
+	@endsection
+
 	@endsection
 @endsection

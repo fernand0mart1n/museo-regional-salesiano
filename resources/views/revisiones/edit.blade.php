@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('titulo', ' - Editando revisión a ' . $revision->pieza->descripcion)
+@section('titulo', ' - Editando revisión a ' . $revision->piez->descripcion)
 
 @section('head')
 
@@ -35,7 +35,7 @@
 
         <?= Former::select('pieza')
         ->fromQuery(App\Pieza::all(), 'descripcion', 'id')
-        ->value($revision->pieza->descripcion) ?>
+        ->value($revision->piez->descripcion) ?>
 
         <?= Former::date('fecha_revision')
         ->value($revision->fecha_revision)

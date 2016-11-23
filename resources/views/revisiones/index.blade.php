@@ -49,10 +49,10 @@
 			@foreach($revisiones as $revision)
 			<tr>
 				<td>
-					{{ $revision->usuario_revision }}
+					{{ $revision->user->name }}
 				</td>
 				<td>
-					{{ $revision->pieza->descripcion }}
+					{{ $revision->piez->descripcion }}
 				</td>
 				<td>
 					{{ Carbon\Carbon::parse($revision->fecha_revision)->format('d/m/Y') }}
@@ -68,17 +68,19 @@
 						<a href="{{ route('revisiones.show', $revision->id) }}" class="btn btn-inverse" title="Ver"><i class="glyphicon glyphicon-eye-open"></i> Ver</a>
                         <a href="{{ route('revisiones.edit', $revision->id) }}" class="btn btn-inverse" title="Editar"><i class="glyphicon glyphicon-edit"></i> Editar</a>
 
-                        <?= Former::open()
-                        ->class('btn-group')
-                        ->method('delete')
-                        ->route('revisiones.destroy', $revision->id) ?>
+                       	@role(('admin'))
+	                        <?= Former::open()
+	                        ->class('btn-group')
+	                        ->method('delete')
+	                        ->route('revisiones.destroy', $revision->id) ?>
 
-                        {{ csrf_field() }}
+	                        {{ csrf_field() }}
 
-                        <?= Former::button()
-                        ->type('submit')
-                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
-                        ->class('btn btn-danger') ?>
+	                        <?= Former::button()
+	                        ->type('submit')
+	                        ->value('<i class="glyphicon glyphicon-trash"></i> Eliminar')
+	                        ->class('btn btn-danger') ?>
+	                    @endrole
 					</div>
 				</td>
 			</tr>
